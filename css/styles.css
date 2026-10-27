@@ -1,0 +1,242 @@
+/* Baby Shower Custom Styles */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap');
+
+:root {
+  --primary: #788f69;
+  --primary-dark: #5e7350;
+  --primary-light: #eef3eb;
+  --accent: #d98a6c;
+  --accent-light: #fcedea;
+  --bg-main: #fdfbf7;
+  --text-main: #2d312e;
+  --card-bg: rgba(255, 255, 255, 0.85);
+}
+
+body.theme-sage {
+  --primary: #788f69;
+  --primary-dark: #5e7350;
+  --primary-light: #eef3eb;
+  --accent: #d98a6c;
+  --accent-light: #fcedea;
+  --bg-main: #fcfbf7;
+}
+
+body.theme-boy {
+  --primary: #5585b5;
+  --primary-dark: #3f6891;
+  --primary-light: #eaf2fa;
+  --accent: #79c2d0;
+  --accent-light: #eef8fa;
+  --bg-main: #f5f9fd;
+}
+
+body.theme-girl {
+  --primary: #d66ba0;
+  --primary-dark: #b54a7f;
+  --primary-light: #fbebf3;
+  --accent: #e8a598;
+  --accent-light: #fbf0ee;
+  --bg-main: #fdf6f9;
+}
+
+body.theme-honey {
+  --primary: #c98b42;
+  --primary-dark: #a86f2e;
+  --primary-light: #faf0e1;
+  --accent: #dd6e42;
+  --accent-light: #fae9e2;
+  --bg-main: #faf7f2;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-primary-dark {
+  color: var(--primary-dark);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-primary-dark {
+  background-color: var(--primary-dark);
+}
+
+.bg-primary-light {
+  background-color: var(--primary-light);
+}
+
+.border-primary {
+  border-color: var(--primary);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+/* Floating soft badge animation */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+.animate-float {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: floatGentle 5s ease-in-out 2s infinite;
+}
+
+/* Glassmorphism Card Effect */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Decorative Background Blobs */
+.bg-blob {
+  position: absolute;
+  filter: blur(60px);
+  z-index: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* Confetti Canvas */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Modal Animations & Styles */
+@keyframes modalSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-modal-in {
+  animation: modalSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-backdrop {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Fullscreen Background Wallpaper (Crisp & Unblurred) */
+.bg-wallpaper {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../assets/image.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -20;
+}
+
+.bg-wallpaper-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+  z-index: -10;
+}
+
+/* 3D Translucent Cube Card Effect */
+.cube-card {
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-bottom: 5px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 25px -4px rgba(50, 80, 120, 0.12), 0 6px 12px -4px rgba(50, 80, 120, 0.08);
+  transition: all 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cube-card:hover {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(255, 255, 255, 0.95);
+  border-bottom-color: rgba(255, 255, 255, 0.95);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 35px -5px rgba(50, 80, 120, 0.22), 0 12px 18px -4px rgba(50, 80, 120, 0.14);
+}
+
+.cube-card:active {
+  transform: translateY(2px) scale(0.98);
+  border-bottom-width: 2px;
+}
+
+
+
+

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baby Boy Shower Celebration & Amazon Registry | Onin & Charlene</title>
+  <meta name="description" content="Join us in celebrating the arrival of our Baby Boy with Onin and Charlene! Baby Shower Invitation, RSVP, and Amazon Registry." />
+  <meta property="og:title" content="Baby Boy Shower Celebration | Onin & Charlene" />
+  <meta property="og:description" content="Welcome Baby Boy! Join us in celebrating with Onin & Charlene." />
+  <meta property="og:image" content="assets/image.jpeg" />
+  <meta property="og:type" content="website" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: 'var(--primary)',
+            'primary-dark': 'var(--primary-dark)',
+            'primary-light': 'var(--primary-light)',
+            accent: 'var(--accent)',
+            'accent-light': 'var(--accent-light)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles & Google Fonts -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="theme-boy text-stone-800 antialiased selection:bg-primary/20 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+
+  <!-- Fullscreen Wallpaper & Soft Frosted Glass Overlay -->
+  <div class="bg-wallpaper"></div>
+  <div class="bg-wallpaper-overlay"></div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- MAIN SCREEN CONTENT -->
+  <div class="relative z-10 flex-grow flex flex-col justify-between py-6 px-4 sm:px-6 max-w-5xl mx-auto w-full">
+    
+    <!-- TOP FLOATING HEADER CARD (No traditional navbar!) -->
+    <header class="w-full bg-white/50 hover:bg-white/65 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-md border-2 border-white/80 mb-6 sm:mb-8 text-center transition">
+      
+      <!-- Top Row: Branding & Theme Controls -->
+      <div class="flex items-center justify-between pb-3 border-b border-stone-200/60 mb-3 text-xs">
+        
+        <!-- Logo / Title -->
+        <div class="flex items-center gap-2">
+          <span class="text-xl">👶</span>
+          <div class="flex flex-col text-left">
+            <span class="font-serif font-bold text-stone-800 text-sm leading-tight">Baby Shower</span>
+            <span class="text-[10px] font-semibold text-primary uppercase tracking-wider">Charlene and Onin</span>
+          </div>
+        </div>
+
+        <!-- Controls: Theme Pills & Admin -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center bg-stone-100/80 rounded-full p-1 border border-stone-200 text-xs">
+            <button data-theme-choice="boy" title="Baby Boy Theme (Default)" class="w-5 h-5 rounded-full bg-[#5585b5] border border-white hover:opacity-90"></button>
+            <button data-theme-choice="sage" title="Boho Sage Theme" class="w-5 h-5 rounded-full bg-[#788f69] border border-white ml-1 hover:opacity-90"></button>
+            <button data-theme-choice="honey" title="Sunny Honey Theme" class="w-5 h-5 rounded-full bg-[#c98b42] border border-white ml-1 hover:opacity-90"></button>
+            <button data-theme-choice="girl" title="Baby Girl Theme" class="w-5 h-5 rounded-full bg-[#d66ba0] border border-white ml-1 hover:opacity-90"></button>
+          </div>
+
+          <button id="toggle-admin-btn" title="Organizer Dashboard" class="p-1.5 text-stone-500 hover:text-stone-800 bg-stone-100/90 rounded-full transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Welcome Badge -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/70 border border-primary/30 text-primary text-xs font-bold mb-2 animate-float shadow-xs">
+        <span>💙</span>
+        <span id="baby-subtitle">A Little Prince is on the Way! 👶 (Name is still a secret!)</span>
+        <span>✨</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight leading-tight">
+        Celebrating Our <span id="baby-name-title" class="text-primary italic">Baby Boy</span>
+      </h1>
+
+      <!-- Parents Line -->
+      <p class="text-xs sm:text-sm md:text-base text-stone-700 font-medium mt-1 mb-2.5">
+        Together with the excited parents-to-be, <strong id="parents-names" class="font-semibold text-stone-900">Charlene and Onin</strong>
+      </p>
+
+      <!-- Event Quick Snapshot -->
+      <div class="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[11px] sm:text-xs text-stone-700 font-semibold bg-white/70 px-4 py-1.5 rounded-full border border-white/80 shadow-xs">
+        <div class="flex items-center gap-1">
+          <span>📅</span>
+          <span id="event-date-text">Saturday, November 28, 2026</span>
+        </div>
+        <span class="text-stone-300 hidden sm:inline">•</span>
+        <div class="flex items-center gap-1">
+          <span>📍</span>
+          <span id="venue-name-text">The Glass House Garden Cafe, Cebu</span>
+        </div>
+      </div>
+
+    </header>
+
+
+    <!-- THE 6 INTERACTIVE 3D CUBES (Translucent frosted glass across the screen) -->
+    <main class="w-full flex-grow flex items-center justify-center my-auto">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5 sm:gap-6 w-full max-w-4xl mx-auto">
+
+        <!-- CUBE 1: Event Details & Schedule -->
+        <button
+          data-open-modal="modal-details"
+          class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
+        >
+          <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
+            📍
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-sm sm:text-base md:text-lg text-stone-800 group-hover:text-primary transition leading-tight">
+              Event Details
+            </h3>
+            <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5 line-clamp-2">
+              Venue, maps & program
+            </p>
+          </div>
+          <div class="w-full pt-2">
+            <span class="inline-block w-full py-1 px-2 rounded-xl bg-white/70 text-sky-800 text-[10px] sm:text-[11px] font-semibold border border-white/80 shadow-xs">
+              When & Where ↗
+            </span>
+          </div>
+        </button>
+
+        <!-- CUBE 2: Live Countdown -->
+        <button
+          data-open-modal="modal-countdown"
+          class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
+        >
+          <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
+            ⏳
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-sm sm:text-base md:text-lg text-stone-800 group-hover:text-primary transition leading-tight">
+              Countdown
+            </h3>
+            <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5">
+              <span id="cube-countdown-days" class="text-primary font-bold text-sm">--</span> Days to Go!
+            </p>
+          </div>
+          <div class="w-full pt-2">
+            <span class="inline-block w-full py-1 px-2 rounded-xl bg-white/70 text-blue-800 text-[10px] sm:text-[11px] font-semibold border border-white/80 shadow-xs">
+              Save Calendar 📅
+            </span>
+          </div>
+        </button>
+
+        <!-- CUBE 3: RSVP (Same translucent frosted glass color as other cubes!) -->
+        <button
+          data-open-modal="modal-rsvp"
+          class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
+        >
+          <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
+            💌
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-sm sm:text-base md:text-lg text-stone-800 group-hover:text-primary transition leading-tight">
+              RSVP Now
+            </h3>
+            <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5">
+              Attendance & Guests
+            </p>
+          </div>
+          <div class="w-full pt-2">
+            <span class="inline-block w-full py-1 px-2 rounded-xl bg-white/70 text-primary text-[10px] sm:text-[11px] font-bold border border-white/80 shadow-xs">
+              Reply by Nov 15 ✨
+            </span>
+          </div>
+        </button>
+
+        <!-- CUBE 4: Amazon Registry & Gifts -->
+        <button
+          data-open-modal="modal-registry"
+          class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
+        >
+          <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
+            🛍️
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-sm sm:text-base md:text-lg text-stone-800 group-hover:text-primary transition leading-tight">
+              Baby Registry
+            </h3>
+            <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5 line-clamp-2">
+              Amazon wishlist & diaper fund
+            </p>
+          </div>
+          <div class="w-full pt-2">
+            <span class="inline-block w-full py-1 px-2 rounded-xl bg-white/70 text-amber-800 text-[10px] sm:text-[11px] font-semibold border border-white/80 shadow-xs">
+              Amazon Gifts 🎁
+            </span>
+          </div>
+        </button>
+
+        <!-- CUBE 5: Baby Games & Predictions -->
+        <button
+          data-open-modal="modal-games"
+          class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
+        >
+          <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
+            🎮
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-sm sm:text-base md:text-lg text-stone-800 group-hover:text-primary transition leading-tight">
+              Games & Polls
+            </h3>
+            <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5 line-clamp-2">
+              Who will baby look like?
+            </p>
+          </div>
+          <div class="w-full pt-2">
+            <span class="inline-block w-full py-1 px-2 rounded-xl bg-white/70 text-indigo-800 text-[10px] sm:text-[11px] font-semibold border border-white/80 shadow-xs">
+              Vote & Predict 👶
+            </span>
+          </div>
+        </button>
+
+        <!-- CUBE 6: Wishes & Guestbook -->
+        <button
+          data-open-modal="modal-guestbook"
+          class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
+        >
+          <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
+            ✍️
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-sm sm:text-base md:text-lg text-stone-800 group-hover:text-primary transition leading-tight">
+              Guestbook
+            </h3>
+            <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5 line-clamp-2">
+              Wishes & parenting advice
+            </p>
+          </div>
+          <div class="w-full pt-2">
+            <span class="inline-block w-full py-1 px-2 rounded-xl bg-white/70 text-rose-800 text-[10px] sm:text-[11px] font-semibold border border-white/80 shadow-xs">
+              Sign Book 💖
+            </span>
+          </div>
+        </button>
+
+      </div>
+    </main>
+
+
+    <!-- FOOTER / CREDIT -->
+    <footer class="mt-6 text-center text-xs text-stone-600 bg-white/50 backdrop-blur-md py-3 px-4 rounded-2xl border border-white/80 shadow-sm max-w-xl mx-auto w-full">
+      <p class="font-serif font-medium text-stone-800">
+        Thank you so much for your love and support! 💙✨
+      </p>
+      <div class="flex items-center justify-center gap-3 text-[11px] text-stone-500 mt-1">
+        <span>For Baby Boy & Onin & Charlene</span>
+        <span>•</span>
+        <button data-open-modal="admin-panel" class="hover:text-primary underline">
+          Organizer Dashboard 📋
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+
+
+  <!-- ======================================================== -->
+  <!-- POPUP MODALS SECTION (Each Cube Opens Its Modal) -->
+  <!-- ======================================================== -->
+
+  <!-- MODAL 1: EVENT DETAILS & SCHEDULE -->
+  <div id="modal-details" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-stone-100 flex items-center justify-between bg-stone-50/90 backdrop-blur sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center text-xl">
+            📍
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-lg text-stone-800 leading-tight">Details & Schedule</h3>
+            <p class="text-xs text-stone-500">When, where, dress code, and program timeline</p>
+          </div>
+        </div>
+        <button data-close-modal class="w-8 h-8 rounded-full bg-stone-200/70 hover:bg-stone-300 text-stone-600 flex items-center justify-center text-xs font-bold transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-6">
+        
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- When Card -->
+          <div class="bg-stone-50 rounded-2xl p-5 border border-stone-200/70">
+            <div class="w-10 h-10 rounded-xl bg-primary-light text-primary flex items-center justify-center text-xl mb-3">
+              ⏰
+            </div>
+            <h4 class="font-bold text-stone-800 text-base mb-1">Date & Time</h4>
+            <p class="text-stone-700 text-sm font-semibold">Saturday, November 28, 2026</p>
+            <p id="event-time-text" class="text-stone-500 text-xs mt-0.5">2:00 PM - 6:00 PM</p>
+            
+            <div class="mt-4 pt-3 border-t border-stone-200/60 flex flex-wrap gap-2 text-xs">
+              <a id="add-to-gcal-btn" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-white border border-stone-200 rounded-full font-medium hover:bg-stone-100 transition">
+                📅 Add to Google Cal
+              </a>
+              <button id="download-ics-btn" class="px-3 py-1.5 bg-white border border-stone-200 rounded-full font-medium hover:bg-stone-100 transition">
+                📲 iCal / Outlook (.ics)
+              </button>
+            </div>
+          </div>
+
+          <!-- Where Card -->
+          <div class="bg-stone-50 rounded-2xl p-5 border border-stone-200/70 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-3">
+                📍
+              </div>
+              <h4 class="font-bold text-stone-800 text-base mb-1">Venue Location</h4>
+              <p class="text-stone-700 text-sm font-semibold">The Glass House Garden Cafe</p>
+              <p id="venue-address-text" class="text-stone-500 text-xs mt-0.5">Busay Hills, Cebu City</p>
+            </div>
+            
+            <div class="mt-4 pt-3 border-t border-stone-200/60">
+              <a id="google-map-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-primary hover:text-primary-dark">
+                <span>Open in Google Maps ↗</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dress Code Card -->
+        <div class="bg-stone-50 rounded-2xl p-5 border border-stone-200/70">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-lg">👕</span>
+            <h4 class="font-bold text-stone-800 text-base" id="dress-code-title">Dress Code & Palette</h4>
+          </div>
+          <p class="text-stone-600 text-xs leading-relaxed mb-4" id="dress-code-desc">
+            Guests are warmly encouraged to wear pastel blue, white, cream, or neutral pastel colors.
+          </p>
+          
+          <!-- Color Swatches -->
+          <div id="palette-container" class="flex items-center justify-between max-w-sm mx-auto pt-1">
+            <!-- Dynamically populated by renderPalette() -->
+          </div>
+        </div>
+
+        <!-- Schedule / Program Timeline -->
+        <div class="bg-stone-50 rounded-2xl p-5 border border-stone-200/70">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">🎉</span>
+            <h4 class="font-bold text-stone-800 text-base">Program of Activities</h4>
+          </div>
+
+          <div id="schedule-list" class="space-y-2">
+            <!-- Dynamically populated by renderSchedule() -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL 2: COUNTDOWN & CALENDAR -->
+  <div id="modal-countdown" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-stone-100 text-center relative animate-modal-in">
+      
+      <button data-close-modal class="absolute top-4 right-4 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 flex items-center justify-center text-xs font-bold transition">
+        ✕
+      </button>
+
+      <div class="w-14 h-14 mx-auto rounded-3xl bg-blue-50 text-primary flex items-center justify-center text-3xl mb-3">
+        ⏳
+      </div>
+      
+      <h3 class="font-serif font-bold text-xl sm:text-2xl text-stone-800">The Countdown Begins</h3>
+      <p id="countdown-message" class="text-xs text-stone-500 mt-1 mb-6">November 28: Our celebration is just around the corner!</p>
+
+      <!-- Big Countdown Boxes -->
+      <div class="grid grid-cols-4 gap-2.5 sm:gap-3 mb-6">
+        
+        <div class="bg-stone-50 rounded-2xl p-3 border border-stone-200/70">
+          <span id="count-days" class="block text-2xl sm:text-4xl font-bold font-serif text-primary">00</span>
+          <span class="text-[10px] uppercase tracking-wider font-semibold text-stone-400">Days</span>
+        </div>
+
+        <div class="bg-stone-50 rounded-2xl p-3 border border-stone-200/70">
+          <span id="count-hours" class="block text-2xl sm:text-4xl font-bold font-serif text-primary">00</span>
+          <span class="text-[10px] uppercase tracking-wider font-semibold text-stone-400">Hours</span>
+        </div>
+
+        <div class="bg-stone-50 rounded-2xl p-3 border border-stone-200/70">
+          <span id="count-minutes" class="block text-2xl sm:text-4xl font-bold font-serif text-primary">00</span>
+          <span class="text-[10px] uppercase tracking-wider font-semibold text-stone-400">Minutes</span>
+        </div>
+
+        <div class="bg-stone-50 rounded-2xl p-3 border border-stone-200/70">
+          <span id="count-seconds" class="block text-2xl sm:text-4xl font-bold font-serif text-primary">00</span>
+          <span class="text-[10px] uppercase tracking-wider font-semibold text-stone-400">Seconds</span>
+        </div>
+
+      </div>
+
+      <!-- Save to Calendar Buttons -->
+      <div class="flex flex-col sm:flex-row gap-2.5">
+        <a id="modal-gcal-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="document.getElementById('add-to-gcal-btn')?.click()" class="flex-1 py-3 px-4 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm">
+          <span>📅 Add to Google Calendar</span>
+        </a>
+        <button onclick="document.getElementById('download-ics-btn')?.click()" class="flex-1 py-3 px-4 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-bold transition flex items-center justify-center gap-1.5">
+          <span>📲 iCal / Outlook (.ics)</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- MODAL 3: RSVP FORM -->
+  <div id="modal-rsvp" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-stone-100 flex items-center justify-between bg-stone-50/90 backdrop-blur sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-primary-light text-primary flex items-center justify-center text-xl">
+            💌
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-lg text-stone-800 leading-tight">RSVP Form</h3>
+            <p class="text-xs text-stone-500">Please confirm by November 15, 2026</p>
+          </div>
+        </div>
+        <button data-close-modal class="w-8 h-8 rounded-full bg-stone-200/70 hover:bg-stone-300 text-stone-600 flex items-center justify-center text-xs font-bold transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto">
+        
+        <form id="rsvp-form" class="space-y-4">
+          
+          <!-- Full Name -->
+          <div>
+            <label for="rsvp-name" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
+              Your Full Name <span class="text-rose-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="rsvp-name"
+              required
+              placeholder="e.g., Sarah Johnson"
+              class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+            />
+          </div>
+
+          <!-- Contact Number / Email -->
+          <div>
+            <label for="rsvp-contact" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
+              Contact Number or Email
+            </label>
+            <input
+              type="text"
+              id="rsvp-contact"
+              placeholder="+1 (604) 555-0123 or email@domain.com"
+              class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+            />
+          </div>
+
+          <!-- Attendance Choice -->
+          <div>
+            <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+              Will you be attending? <span class="text-rose-500">*</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <label class="flex items-center gap-2.5 p-3 rounded-xl border border-stone-200 hover:border-primary cursor-pointer transition has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
+                <input type="radio" name="attending" value="yes" checked class="text-primary focus:ring-primary h-4 w-4" />
+                <div>
+                  <span class="block text-xs font-bold text-stone-800">Yes, I'll be there! 🎉</span>
+                  <span class="block text-[11px] text-stone-500">Can't wait to celebrate!</span>
+                </div>
+              </label>
+
+              <label class="flex items-center gap-2.5 p-3 rounded-xl border border-stone-200 hover:border-stone-400 cursor-pointer transition has-[:checked]:bg-stone-100 has-[:checked]:border-stone-400">
+                <input type="radio" name="attending" value="no" class="text-stone-600 focus:ring-stone-500 h-4 w-4" />
+                <div>
+                  <span class="block text-xs font-bold text-stone-800">Regretfully unable 🥺</span>
+                  <span class="block text-[11px] text-stone-500">Sending love & blessings</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Companions / Plus Ones -->
+          <div>
+            <label for="rsvp-companions" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
+              How many guests are attending with you? (+1s or children)
+            </label>
+            <select
+              id="rsvp-companions"
+              class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition bg-white"
+            >
+              <option value="0">Just myself (0 additional guests)</option>
+              <option value="1">+1 (One additional guest)</option>
+              <option value="2">+2 (Two additional guests)</option>
+              <option value="3">+3 (Three additional guests)</option>
+            </select>
+          </div>
+
+          <!-- Dietary Restrictions -->
+          <div>
+            <label for="rsvp-dietary" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
+              Dietary Restrictions or Food Allergies (Optional)
+            </label>
+            <input
+              type="text"
+              id="rsvp-dietary"
+              placeholder="e.g., Vegetarian, gluten-free, peanut allergy, no pork"
+              class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+            />
+          </div>
+
+          <!-- Message for Parents & Baby -->
+          <div>
+            <label for="rsvp-message" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
+              Message or Advice for Onin, Charlene, and Baby Boy
+            </label>
+            <textarea
+              id="rsvp-message"
+              rows="2"
+              placeholder="Write your sweet wishes or parenting advice here..."
+              class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full bg-primary hover:bg-primary-dark text-white font-bold text-sm py-3.5 rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+          >
+            <span>Submit My RSVP 💌</span>
+          </button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL 4: AMAZON REGISTRY & GIFTS -->
+  <div id="modal-registry" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-stone-100 flex items-center justify-between bg-stone-50/90 backdrop-blur sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+            🛍️
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-lg text-stone-800 leading-tight">Baby Gift Registry</h3>
+            <p class="text-xs text-stone-500">Amazon Registry highlights, gift reservations & diaper fund</p>
+          </div>
+        </div>
+        <button data-close-modal class="w-8 h-8 rounded-full bg-stone-200/70 hover:bg-stone-300 text-stone-600 flex items-center justify-center text-xs font-bold transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-8">
+        
+        <!-- Big Amazon Registry Hero Banner -->
+        <div id="amazon-registry-card">
+          <!-- Rendered dynamically by renderAmazonRegistryBanner() -->
+        </div>
+
+        <!-- Wishlist Highlights Section -->
+        <div>
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+            <div>
+              <h4 class="font-serif font-bold text-base text-stone-800">Baby Boy's Wishlist Highlights</h4>
+              <p class="text-xs text-stone-500">Order directly on Amazon or reserve an item so others know it's taken:</p>
+            </div>
+            
+            <!-- Search -->
+            <input
+              type="text"
+              id="registry-search"
+              placeholder="Search wishlist..."
+              class="w-full sm:w-52 px-3 py-1.5 bg-stone-50 rounded-full border border-stone-200 text-xs focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm"
+            />
+          </div>
+
+          <!-- Categories Filter Bar -->
+          <div id="registry-categories" class="flex items-center gap-2 overflow-x-auto w-full pb-2 mb-4 scrollbar-none">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Registry Grid -->
+          <div id="registry-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Dynamically populated by renderRegistryItems() -->
+          </div>
+        </div>
+
+        <!-- Diaper / Future Fund -->
+        <div class="bg-gradient-to-br from-stone-50 to-white rounded-2xl p-6 border border-stone-200/80">
+          <div class="max-w-xl mx-auto text-center mb-5">
+            <span class="text-2xl">🍼✨</span>
+            <h4 class="text-lg font-serif font-bold text-stone-800 mt-1">Diaper & Future Fund</h4>
+            <p class="text-xs text-stone-500 mt-0.5">
+              For beloved family and friends from Canada and afar who wish to send blessings electronically:
+            </p>
+          </div>
+
+          <div id="cash-fund-details">
+            <!-- Rendered by renderCashFund() -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL 5: BABY GAMES & PREDICTIONS -->
+  <div id="modal-games" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-stone-100 flex items-center justify-between bg-stone-50/90 backdrop-blur sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
+            🎮
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-lg text-stone-800 leading-tight">Games & Predictions</h3>
+            <p class="text-xs text-stone-500">Live poll & secret name predictions</p>
+          </div>
+        </div>
+        <button data-close-modal class="w-8 h-8 rounded-full bg-stone-200/70 hover:bg-stone-300 text-stone-600 flex items-center justify-center text-xs font-bold transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-6">
+        
+        <!-- Game 1: Who Will Baby Look Like? -->
+        <div class="bg-stone-50 rounded-2xl p-5 sm:p-6 border border-stone-200/70 text-center">
+          <span class="text-[11px] uppercase tracking-wider font-bold text-primary">Game #1</span>
+          <h4 class="text-lg sm:text-xl font-serif font-bold text-stone-900 mt-0.5 mb-1.5">Who Will Baby Boy Look Like? 👶</h4>
+          <p class="text-stone-500 text-xs max-w-md mx-auto mb-5">
+            Cast your vote! Will Baby Boy take more after Daddy Onin or Mommy Charlene?
+          </p>
+
+          <!-- Voting Buttons -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
+            <button id="vote-daddy-btn" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 border border-sky-300 font-bold text-xs transition transform hover:scale-105 flex items-center justify-center gap-2">
+              <span>👨💙</span>
+              <span>Team Daddy Onin!</span>
+            </button>
+            <span class="text-stone-300 font-serif italic text-xs">or</span>
+            <button id="vote-mommy-btn" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-900 border border-rose-300 font-bold text-xs transition transform hover:scale-105 flex items-center justify-center gap-2">
+              <span>👩💖</span>
+              <span>Team Mommy Charlene!</span>
+            </button>
+          </div>
+
+          <!-- Progress Bar Meter -->
+          <div class="max-w-md mx-auto">
+            <div class="h-3.5 bg-stone-200 rounded-full overflow-hidden flex shadow-inner">
+              <div id="daddy-vote-bar" class="bg-sky-500 transition-all duration-700" style="width: 50%"></div>
+              <div id="mommy-vote-bar" class="bg-rose-400 transition-all duration-700" style="width: 50%"></div>
+            </div>
+            <div class="flex justify-between items-center text-[11px] font-semibold mt-1.5">
+              <span id="daddy-vote-count" class="text-sky-700">Team Daddy Onin: 0%</span>
+              <span id="mommy-vote-count" class="text-rose-700">Team Mommy Charlene: 0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game 2: Guess Baby Boy's Name! -->
+        <div class="bg-stone-50 rounded-2xl p-5 sm:p-6 border border-stone-200/70">
+          <div class="text-center max-w-md mx-auto mb-4">
+            <span class="text-[11px] uppercase tracking-wider font-bold text-primary">Game #2</span>
+            <h4 class="text-lg sm:text-xl font-serif font-bold text-stone-900 mt-0.5">Guess Baby Boy's Name! 🤫✨</h4>
+            <p class="text-stone-500 text-xs mt-1">
+              Since Baby Boy's name is still secret, what do you think they will name him? Put your best guess!
+            </p>
+          </div>
+
+          <!-- Guess Form -->
+          <form id="name-guess-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-2 mb-5">
+            <input
+              type="text"
+              id="guess-guesser-name"
+              required
+              placeholder="Your Name"
+              class="w-full sm:w-1/3 px-3 py-2 rounded-xl border border-stone-200 text-xs focus:outline-none focus:ring-2 focus:ring-primary/40 bg-white"
+            />
+            <input
+              type="text"
+              id="guess-baby-name"
+              required
+              placeholder="Your Guess (e.g. Liam, Noah)"
+              class="w-full sm:w-1/2 px-3 py-2 rounded-xl border border-stone-200 text-xs focus:outline-none focus:ring-2 focus:ring-primary/40 bg-white"
+            />
+            <button
+              type="submit"
+              class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm whitespace-nowrap"
+            >
+              Submit ✨
+            </button>
+          </form>
+
+          <!-- List of Name Guesses -->
+          <div class="pt-3 border-t border-stone-200/60 text-center">
+            <span class="block text-[11px] font-bold uppercase text-stone-400 tracking-wider mb-2.5">Guest Predictions:</span>
+            <div id="name-guesses-list" class="flex flex-wrap items-center justify-center gap-1.5">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL 6: WISHES & GUESTBOOK -->
+  <div id="modal-guestbook" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-stone-100 flex items-center justify-between bg-stone-50/90 backdrop-blur sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl">
+            ✍️
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-lg text-stone-800 leading-tight">Wishes & Guestbook</h3>
+            <p class="text-xs text-stone-500">Leave warm blessings and advice for the growing family</p>
+          </div>
+        </div>
+        <button data-close-modal class="w-8 h-8 rounded-full bg-stone-200/70 hover:bg-stone-300 text-stone-600 flex items-center justify-center text-xs font-bold transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-6">
+        
+        <!-- Quick Wish Submit Form -->
+        <div class="bg-stone-50 rounded-2xl p-4 sm:p-5 border border-stone-200/70">
+          <h4 class="font-bold text-stone-800 text-xs uppercase tracking-wider mb-2.5">Leave a Message:</h4>
+          <form id="direct-wish-form" class="space-y-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <input
+                type="text"
+                id="wish-name"
+                required
+                placeholder="Your Name"
+                class="px-3 py-2 rounded-xl border border-stone-200 text-xs focus:outline-none focus:ring-2 focus:ring-primary/40 bg-white"
+              />
+              <input
+                type="text"
+                id="wish-relationship"
+                placeholder="Relationship (e.g., Aunt, Cousin, Friend)"
+                class="px-3 py-2 rounded-xl border border-stone-200 text-xs focus:outline-none focus:ring-2 focus:ring-primary/40 bg-white"
+              />
+            </div>
+            <textarea
+              id="wish-message"
+              required
+              rows="2"
+              placeholder="Write your wishes for Onin, Charlene, and Baby Boy..."
+              class="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:outline-none focus:ring-2 focus:ring-primary/40 bg-white"
+            ></textarea>
+            <button
+              type="submit"
+              class="w-full bg-stone-800 hover:bg-stone-900 text-white text-xs font-semibold py-2.5 rounded-xl transition shadow-sm"
+            >
+              Post Message ✨
+            </button>
+          </form>
+        </div>
+
+        <!-- Grid of Wishes -->
+        <div>
+          <h4 class="font-bold text-stone-800 text-xs uppercase tracking-wider mb-3">Messages from Loved Ones:</h4>
+          <div id="wishes-container" class="space-y-3">
+            <!-- Dynamically populated by renderWishes() -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL 7: CLAIM REGISTRY GIFT MODAL -->
+  <div id="claim-modal" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/50 backdrop-blur-sm hidden modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-100 relative animate-modal-in">
+      <button id="claim-modal-close" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 text-lg">✕</button>
+
+      <div class="text-center mb-5">
+        <span class="text-3xl">🎁</span>
+        <h3 class="text-lg font-bold text-stone-800 mt-2">Claim / Reserve This Gift</h3>
+        <p id="modal-item-title" class="text-sm font-semibold text-primary mt-1"></p>
+        <p id="modal-item-desc" class="text-xs text-stone-500 mt-0.5"></p>
+      </div>
+
+      <form id="claim-form" class="space-y-4">
+        <div>
+          <label for="claim-name" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
+            Your Name <span class="text-rose-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="claim-name"
+            required
+            placeholder="Who is gifting this item?"
+            class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+          />
+        </div>
+
+        <div>
+          <label for="claim-note" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
+            Additional Note (Optional)
+          </label>
+          <input
+            type="text"
+            id="claim-note"
+            placeholder="e.g., Ordered on Amazon / Bringing to shower"
+            class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+          />
+        </div>
+
+        <div class="pt-2 flex items-center justify-between text-xs">
+          <a id="modal-item-store" href="#" target="_blank" rel="noopener noreferrer" class="text-amber-800 hover:underline font-bold flex items-center gap-1">
+            <span>📦 View on Amazon</span>
+            <span>↗</span>
+          </a>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-primary hover:bg-primary-dark text-white font-bold text-sm py-3 rounded-xl shadow-md transition"
+        >
+          Confirm Reservation ✓
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- MODAL 8: RSVP SUCCESS MODAL -->
+  <div id="rsvp-success-modal" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/50 backdrop-blur-sm hidden modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-stone-100 text-center relative animate-modal-in">
+      <div id="rsvp-success-details">
+        <!-- Rendered by JS -->
+      </div>
+      <button
+        id="rsvp-success-close"
+        class="mt-4 w-full bg-stone-800 hover:bg-stone-900 text-white text-xs font-bold py-3 rounded-xl transition"
+      >
+        Got it, thank you!
+      </button>
+    </div>
+  </div>
+
+
+  <!-- MODAL 9: ORGANIZER DASHBOARD -->
+  <div id="admin-panel" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-200 overflow-hidden animate-modal-in">
+      
+      <!-- Panel Header -->
+      <div class="px-6 py-4 border-b border-stone-200 flex items-center justify-between bg-stone-50">
+        <div>
+          <h3 class="font-serif font-bold text-lg text-stone-800">Organizer Dashboard 📋</h3>
+          <p class="text-xs text-stone-500">Track RSVPs, headcounts, and claimed gifts for Onin & Charlene.</p>
+        </div>
+        <button id="close-admin-btn" data-close-modal class="text-stone-400 hover:text-stone-700 text-xl font-bold">✕</button>
+      </div>
+
+      <!-- Panel Body -->
+      <div class="p-6 overflow-y-auto space-y-6">
+        
+        <!-- Metrics -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          <div class="bg-stone-50 border border-stone-200 rounded-2xl p-4 text-center">
+            <span class="text-xs uppercase text-stone-400 font-bold">Total Responses</span>
+            <span id="admin-stat-responses" class="block text-2xl font-bold text-stone-800 mt-1">0</span>
+          </div>
+          <div class="bg-sky-50 border border-sky-100 rounded-2xl p-4 text-center">
+            <span class="text-xs uppercase text-sky-700 font-bold">Attending Headcount</span>
+            <span id="admin-stat-headcount" class="block text-2xl font-bold text-sky-800 mt-1">0</span>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-2xl p-4 text-center">
+            <span class="text-xs uppercase text-stone-400 font-bold">Declined</span>
+            <span id="admin-stat-declined" class="block text-2xl font-bold text-stone-500 mt-1">0</span>
+          </div>
+          <div class="bg-amber-50 border border-amber-100 rounded-2xl p-4 text-center">
+            <span class="text-xs uppercase text-amber-600 font-bold">Gifts Claimed</span>
+            <span id="admin-stat-claimed" class="block text-2xl font-bold text-amber-700 mt-1">0 / 6</span>
+          </div>
+        </div>
+
+        <!-- RSVP Table -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="font-bold text-stone-800 text-sm">Guest List (RSVP Table):</h4>
+            <div class="flex items-center gap-2">
+              <button id="export-csv-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-1.5 rounded-xl transition flex items-center gap-1 shadow-sm">
+                <span>Download Excel / CSV 📥</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto border border-stone-200 rounded-2xl bg-white">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-stone-50 border-b border-stone-200 text-stone-500 uppercase font-bold text-[10px]">
+                <tr>
+                  <th class="py-2.5 px-3">Name</th>
+                  <th class="py-2.5 px-3">Contact</th>
+                  <th class="py-2.5 px-3">Status</th>
+                  <th class="py-2.5 px-3 text-center">Headcount</th>
+                  <th class="py-2.5 px-3">Dietary</th>
+                  <th class="py-2.5 px-3">Message</th>
+                </tr>
+              </thead>
+              <tbody id="admin-rsvp-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Admin Actions -->
+        <div class="pt-4 border-t border-stone-200 flex items-center justify-between text-xs">
+          <span class="text-stone-400">Data is saved securely in your browser's local storage.</span>
+          <button id="clear-sample-data-btn" class="text-rose-600 hover:text-rose-800 font-semibold underline">
+            Clear Data / Reset
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

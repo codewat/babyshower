@@ -186,6 +186,21 @@ body {
   animation: fadeIn 0.2s ease-out forwards;
 }
 
+/* Ensure hidden modals are completely inactive and never intercept mouse clicks */
+.app-modal.hidden {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.app-modal:not(.hidden) {
+  display: flex !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 body.modal-open {
   overflow: hidden;
 }

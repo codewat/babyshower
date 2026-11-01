@@ -88,34 +88,51 @@ function setStorage(key, value) {
   }
 }
 
-// App Controller
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  renderHeroAndDetails();
-  initCountdown();
-  renderPalette();
-  renderSchedule();
-  renderAmazonRegistryBanner();
-  renderCashFund();
-  initRegistry();
-  initRSVPForm();
-  initWishes();
-  initResemblancePoll();
-  initNameGuessGame();
-  initAdminDashboard();
-  initModals();
-});
+// App Controller with readyState check & task isolation
+function initApp() {
+  const tasks = [
+    ['Theme', initTheme],
+    ['Hero & Details', renderHeroAndDetails],
+    ['Countdown', initCountdown],
+    ['Palette', renderPalette],
+    ['Schedule', renderSchedule],
+    ['Amazon Banner', renderAmazonRegistryBanner],
+    ['Cash Fund', renderCashFund],
+    ['Registry', initRegistry],
+    ['RSVP Form', initRSVPForm],
+    ['Wishes', initWishes],
+    ['Resemblance Poll', initResemblancePoll],
+    ['Name Guess Game', initNameGuessGame],
+    ['Admin Dashboard', initAdminDashboard],
+    ['Modals', initModals]
+  ];
+
+  tasks.forEach(([name, fn]) => {
+    try {
+      fn();
+    } catch (err) {
+      console.error(`Init error in "${name}":`, err);
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  // If script executes after DOM is already parsed / interactive
+  initApp();
+}
 
 // 1. Theme Initializer (Defaults to 'boy' theme)
 function initTheme() {
-  const savedTheme = localStorage.getItem(STORAGE_KEYS.CURRENT_THEME) || 'boy';
+  const savedTheme = getStorage(STORAGE_KEYS.CURRENT_THEME, 'boy');
   applyTheme(savedTheme);
 
   document.querySelectorAll('[data-theme-choice]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const theme = e.currentTarget.getAttribute('data-theme-choice');
       applyTheme(theme);
-      localStorage.setItem(STORAGE_KEYS.CURRENT_THEME, theme);
+      setStorage(STORAGE_KEYS.CURRENT_THEME, theme);
     });
   });
 }
@@ -976,8 +993,10 @@ function exportRsvpsToCSV() {
 
 // 14. Modal Management System
 function openModal(modalId) {
-  const modal = document.getElementById(modalId);
+  if (!modalId) return;
+  const modal = typeof modalId === 'string' ? document.getElementById(modalId) : modalId;
   if (!modal) return;
+  const targetId = modal.id;
 
   // Hide other modals unless it's a nested modal like claim-modal
   document.querySelectorAll('.app-modal').forEach(m => {
@@ -992,20 +1011,24 @@ function openModal(modalId) {
   document.body.classList.add('modal-open');
 
   // Trigger targeted re-renderings when modal opens
-  if (modalId === 'modal-details') {
-    renderPalette();
-    renderSchedule();
-  } else if (modalId === 'modal-registry') {
-    renderRegistryFilterButtons();
-    renderRegistryItems();
-    renderCashFund();
-  } else if (modalId === 'modal-games') {
-    renderResemblancePoll();
-    renderNameGuesses();
-  } else if (modalId === 'modal-guestbook') {
-    renderWishes();
-  } else if (modalId === 'admin-panel') {
-    updateAdminStats();
+  try {
+    if (targetId === 'modal-details') {
+      renderPalette();
+      renderSchedule();
+    } else if (targetId === 'modal-registry') {
+      renderRegistryFilterButtons();
+      renderRegistryItems();
+      renderCashFund();
+    } else if (targetId === 'modal-games') {
+      renderResemblancePoll();
+      renderNameGuesses();
+    } else if (targetId === 'modal-guestbook') {
+      renderWishes();
+    } else if (targetId === 'admin-panel') {
+      updateAdminStats();
+    }
+  } catch (err) {
+    console.error('Error refreshing modal content:', err);
   }
 }
 
@@ -1029,12 +1052,13 @@ function closeAllModals() {
   document.body.classList.remove('modal-open');
 }
 
+// Immediately bind to global window so inline onclick="openModal(...)" works anywhere
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.closeAllModals = closeAllModals;
 
 function initModals() {
-  // Elements with data-open-modal attribute
+  // Direct event listeners on existing elements
   document.querySelectorAll('[data-open-modal]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -1043,7 +1067,6 @@ function initModals() {
     });
   });
 
-  // Elements with data-close-modal attribute
   document.querySelectorAll('[data-close-modal]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -1052,13 +1075,35 @@ function initModals() {
     });
   });
 
-  // Clicking on background overlay outside modal container
   document.querySelectorAll('.app-modal').forEach(modal => {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         closeModal(modal);
       }
     });
+  });
+
+  // Global delegation handler - ensures clicks on button children or dynamically rendered elements ALWAYS work
+  document.addEventListener('click', (e) => {
+    const openBtn = e.target.closest('[data-open-modal]');
+    if (openBtn) {
+      e.preventDefault();
+      const targetId = openBtn.getAttribute('data-open-modal');
+      if (targetId) openModal(targetId);
+      return;
+    }
+
+    const closeBtn = e.target.closest('[data-close-modal]');
+    if (closeBtn) {
+      e.preventDefault();
+      const modal = closeBtn.closest('.app-modal');
+      if (modal) closeModal(modal);
+      return;
+    }
+
+    if (e.target.classList && e.target.classList.contains('app-modal')) {
+      closeModal(e.target);
+    }
   });
 
   // Escape key closes modal
@@ -1069,7 +1114,11 @@ function initModals() {
   });
 
   // Handle URL hash navigation (#rsvp, #details, #registry, etc.)
-  handleHashNavigation();
+  try {
+    handleHashNavigation();
+  } catch (err) {
+    console.error('Hash navigation error:', err);
+  }
   window.addEventListener('hashchange', handleHashNavigation);
 }
 

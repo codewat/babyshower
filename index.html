@@ -47,7 +47,7 @@
     <header class="relative w-full bg-white/50 hover:bg-white/65 backdrop-blur-md rounded-3xl p-5 sm:p-7 shadow-md border-2 border-white/80 mb-6 sm:mb-8 text-center transition">
       
       <!-- Discreet Admin Dashboard Toggle in Top-Right Corner -->
-      <button id="toggle-admin-btn" title="Organizer Dashboard" class="absolute top-3.5 right-3.5 p-1.5 text-stone-400 hover:text-stone-700 bg-stone-100/70 hover:bg-stone-200/80 rounded-full transition">
+      <button id="toggle-admin-btn" type="button" data-open-modal="admin-panel" onclick="openModal('admin-panel')" title="Organizer Dashboard" class="absolute top-3.5 right-3.5 p-1.5 text-stone-400 hover:text-stone-700 bg-stone-100/70 hover:bg-stone-200/80 rounded-full transition cursor-pointer">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
         </svg>
@@ -93,7 +93,9 @@
 
         <!-- CUBE 1: Event Details & Schedule -->
         <button
+          type="button"
           data-open-modal="modal-details"
+          onclick="openModal('modal-details')"
           class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
         >
           <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
@@ -116,7 +118,9 @@
 
         <!-- CUBE 2: Live Countdown -->
         <button
+          type="button"
           data-open-modal="modal-countdown"
+          onclick="openModal('modal-countdown')"
           class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
         >
           <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
@@ -139,7 +143,9 @@
 
         <!-- CUBE 3: RSVP (Same translucent frosted glass color as other cubes!) -->
         <button
+          type="button"
           data-open-modal="modal-rsvp"
+          onclick="openModal('modal-rsvp')"
           class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
         >
           <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
@@ -162,7 +168,9 @@
 
         <!-- CUBE 4: Amazon Registry & Gifts -->
         <button
+          type="button"
           data-open-modal="modal-registry"
+          onclick="openModal('modal-registry')"
           class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
         >
           <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
@@ -185,7 +193,9 @@
 
         <!-- CUBE 5: Baby Games & Predictions -->
         <button
+          type="button"
           data-open-modal="modal-games"
+          onclick="openModal('modal-games')"
           class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
         >
           <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
@@ -208,7 +218,9 @@
 
         <!-- CUBE 6: Wishes & Guestbook -->
         <button
+          type="button"
           data-open-modal="modal-guestbook"
+          onclick="openModal('modal-guestbook')"
           class="cube-card group flex flex-col items-center justify-between p-4 sm:p-6 rounded-3xl text-center transition cursor-pointer min-h-[160px] sm:min-h-[195px]"
         >
           <div class="text-3xl sm:text-5xl group-hover:scale-110 transition duration-300 mt-1">
@@ -241,7 +253,7 @@
       <div class="flex items-center justify-center gap-3 text-[11px] text-stone-500 mt-1">
         <span>For Baby Boy & Onin & Charlene</span>
         <span>•</span>
-        <button data-open-modal="admin-panel" class="hover:text-primary underline">
+        <button type="button" data-open-modal="admin-panel" onclick="openModal('admin-panel')" class="hover:text-primary underline cursor-pointer">
           Organizer Dashboard 📋
         </button>
       </div>
@@ -256,7 +268,7 @@
   <!-- ======================================================== -->
 
   <!-- MODAL 1: EVENT DETAILS & SCHEDULE -->
-  <div id="modal-details" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+  <div id="modal-details" class="app-modal fixed inset-0 z-50 items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
     <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
       
       <!-- Modal Header -->
@@ -356,7 +368,7 @@
 
 
   <!-- MODAL 2: COUNTDOWN & CALENDAR -->
-  <div id="modal-countdown" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+  <div id="modal-countdown" class="app-modal fixed inset-0 z-50 items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
     <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-stone-100 text-center relative animate-modal-in">
       
       <button data-close-modal class="absolute top-4 right-4 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 flex items-center justify-center text-xs font-bold transition">
@@ -410,7 +422,7 @@
 
 
   <!-- MODAL 3: RSVP FORM -->
-  <div id="modal-rsvp" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+  <div id="modal-rsvp" class="app-modal fixed inset-0 z-50 items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
     <div class="bg-white rounded-3xl max-w-xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
       
       <!-- Modal Header -->
@@ -543,7 +555,7 @@
 
 
   <!-- MODAL 4: AMAZON REGISTRY & GIFTS -->
-  <div id="modal-registry" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+  <div id="modal-registry" class="app-modal fixed inset-0 z-50 items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
     <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
       
       <!-- Modal Header -->
@@ -619,7 +631,7 @@
 
 
   <!-- MODAL 5: BABY GAMES & PREDICTIONS -->
-  <div id="modal-games" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+  <div id="modal-games" class="app-modal fixed inset-0 z-50 items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
     <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
       
       <!-- Modal Header -->
@@ -724,7 +736,7 @@
 
 
   <!-- MODAL 6: WISHES & GUESTBOOK -->
-  <div id="modal-guestbook" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+  <div id="modal-guestbook" class="app-modal fixed inset-0 z-50 items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
     <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-100 overflow-hidden animate-modal-in">
       
       <!-- Modal Header -->
@@ -795,9 +807,9 @@
 
 
   <!-- MODAL 7: CLAIM REGISTRY GIFT MODAL -->
-  <div id="claim-modal" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/50 backdrop-blur-sm hidden modal-backdrop">
+  <div id="claim-modal" class="app-modal fixed inset-0 z-50 items-center justify-center p-4 bg-stone-900/50 backdrop-blur-sm hidden modal-backdrop">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-100 relative animate-modal-in">
-      <button id="claim-modal-close" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 text-lg">✕</button>
+      <button id="claim-modal-close" data-close-modal class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 text-lg cursor-pointer">✕</button>
 
       <div class="text-center mb-5">
         <span class="text-3xl">🎁</span>
@@ -851,14 +863,15 @@
 
 
   <!-- MODAL 8: RSVP SUCCESS MODAL -->
-  <div id="rsvp-success-modal" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/50 backdrop-blur-sm hidden modal-backdrop">
+  <div id="rsvp-success-modal" class="app-modal fixed inset-0 z-50 items-center justify-center p-4 bg-stone-900/50 backdrop-blur-sm hidden modal-backdrop">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-stone-100 text-center relative animate-modal-in">
       <div id="rsvp-success-details">
         <!-- Rendered by JS -->
       </div>
       <button
         id="rsvp-success-close"
-        class="mt-4 w-full bg-stone-800 hover:bg-stone-900 text-white text-xs font-bold py-3 rounded-xl transition"
+        data-close-modal
+        class="mt-4 w-full bg-stone-800 hover:bg-stone-900 text-white text-xs font-bold py-3 rounded-xl transition cursor-pointer"
       >
         Got it, thank you!
       </button>
@@ -867,7 +880,7 @@
 
 
   <!-- MODAL 9: ORGANIZER DASHBOARD -->
-  <div id="admin-panel" class="app-modal fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
+  <div id="admin-panel" class="app-modal fixed inset-0 z-50 items-center justify-center p-3 sm:p-6 bg-stone-900/60 backdrop-blur-md hidden modal-backdrop">
     <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-stone-200 overflow-hidden animate-modal-in">
       
       <!-- Panel Header -->

@@ -44,37 +44,14 @@
   <div class="relative z-10 flex-grow flex flex-col justify-between py-6 px-4 sm:px-6 max-w-5xl mx-auto w-full">
     
     <!-- TOP FLOATING HEADER CARD (No traditional navbar!) -->
-    <header class="w-full bg-white/50 hover:bg-white/65 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-md border-2 border-white/80 mb-6 sm:mb-8 text-center transition">
+    <header class="relative w-full bg-white/50 hover:bg-white/65 backdrop-blur-md rounded-3xl p-5 sm:p-7 shadow-md border-2 border-white/80 mb-6 sm:mb-8 text-center transition">
       
-      <!-- Top Row: Branding & Theme Controls -->
-      <div class="flex items-center justify-between pb-3 border-b border-stone-200/60 mb-3 text-xs">
-        
-        <!-- Logo / Title -->
-        <div class="flex items-center gap-2">
-          <span class="text-xl">👶</span>
-          <div class="flex flex-col text-left">
-            <span class="font-serif font-bold text-stone-800 text-sm leading-tight">Baby Shower</span>
-            <span class="text-[10px] font-semibold text-primary uppercase tracking-wider">Charlene and Onin</span>
-          </div>
-        </div>
-
-        <!-- Controls: Theme Pills & Admin -->
-        <div class="flex items-center gap-2">
-          <div class="flex items-center bg-stone-100/80 rounded-full p-1 border border-stone-200 text-xs">
-            <button data-theme-choice="boy" title="Baby Boy Theme (Default)" class="w-5 h-5 rounded-full bg-[#5585b5] border border-white hover:opacity-90"></button>
-            <button data-theme-choice="sage" title="Boho Sage Theme" class="w-5 h-5 rounded-full bg-[#788f69] border border-white ml-1 hover:opacity-90"></button>
-            <button data-theme-choice="honey" title="Sunny Honey Theme" class="w-5 h-5 rounded-full bg-[#c98b42] border border-white ml-1 hover:opacity-90"></button>
-            <button data-theme-choice="girl" title="Baby Girl Theme" class="w-5 h-5 rounded-full bg-[#d66ba0] border border-white ml-1 hover:opacity-90"></button>
-          </div>
-
-          <button id="toggle-admin-btn" title="Organizer Dashboard" class="p-1.5 text-stone-500 hover:text-stone-800 bg-stone-100/90 rounded-full transition">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-            </svg>
-          </button>
-        </div>
-
-      </div>
+      <!-- Discreet Admin Dashboard Toggle in Top-Right Corner -->
+      <button id="toggle-admin-btn" title="Organizer Dashboard" class="absolute top-3.5 right-3.5 p-1.5 text-stone-400 hover:text-stone-700 bg-stone-100/70 hover:bg-stone-200/80 rounded-full transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+        </svg>
+      </button>
 
       <!-- Welcome Badge -->
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/70 border border-primary/30 text-primary text-xs font-bold mb-2 animate-float shadow-xs">

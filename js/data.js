@@ -17,9 +17,9 @@ const EVENT_CONFIG = {
   displayTime: "2:00 PM - 6:00 PM",
   
   // Venue Details
-  venueName: "The Glass House Garden Cafe",
-  venueAddress: "Busay Hills, Cebu City, Philippines",
-  googleMapsUrl: "https://maps.google.com/?q=Busay+Cebu+City",
+  venueName: "5 Candle Liteway",
+  venueAddress: "North York, ON M2R1M6",
+  googleMapsUrl: "https://maps.google.com/?q=5+Candle+Liteway,+North+York,+ON+M2R1M6",
   
   // Theme & Dress Code (Baby Boy Motif)
   dressCodeTitle: "Pastel Blue, White & Soft Earth Tones",

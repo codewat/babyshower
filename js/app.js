@@ -141,7 +141,8 @@ function renderHeroAndDetails() {
     'parents-names': EVENT_CONFIG.parentsNames,
     'event-date-text': EVENT_CONFIG.displayDate,
     'event-time-text': EVENT_CONFIG.displayTime,
-    'venue-name-text': EVENT_CONFIG.venueName,
+    'venue-name-text': `${EVENT_CONFIG.venueName}, ${EVENT_CONFIG.venueAddress}`,
+    'venue-name-text-modal': EVENT_CONFIG.venueName,
     'venue-address-text': EVENT_CONFIG.venueAddress,
     'dress-code-title': EVENT_CONFIG.dressCodeTitle,
     'dress-code-desc': EVENT_CONFIG.dressCodeDescription
@@ -158,9 +159,18 @@ function renderHeroAndDetails() {
     heroAmazonBtn.href = EVENT_CONFIG.amazonRegistryUrl;
   }
 
+  // Google Map Links
   const mapLink = document.getElementById('google-map-btn');
   if (mapLink) {
     mapLink.href = EVENT_CONFIG.googleMapsUrl;
+  }
+  const headerMapLink = document.getElementById('header-map-link');
+  if (headerMapLink) {
+    headerMapLink.href = EVENT_CONFIG.googleMapsUrl;
+  }
+  const modalAddressLink = document.getElementById('modal-address-link');
+  if (modalAddressLink) {
+    modalAddressLink.href = EVENT_CONFIG.googleMapsUrl;
   }
 
   // Calendar Links
@@ -675,9 +685,9 @@ function showRsvpSuccessModal(rsvp) {
             : `Thank you, <strong>${rsvp.name}</strong>, for sending your warmest blessings to Onin & Charlene!`
         }
       </p>
-      <div class="mt-4 p-3 bg-stone-50 rounded-2xl text-xs text-stone-500 text-left">
+      <div class="mt-4 p-3 bg-stone-50 rounded-2xl text-xs text-stone-500 text-left space-y-1">
         <p><strong>Date:</strong> ${EVENT_CONFIG.displayDate} (${EVENT_CONFIG.displayTime})</p>
-        <p><strong>Location:</strong> ${EVENT_CONFIG.venueName}</p>
+        <p><strong>Location:</strong> <a href="${EVENT_CONFIG.googleMapsUrl}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-semibold" title="Open in Google Maps">${EVENT_CONFIG.venueName}, ${EVENT_CONFIG.venueAddress} ↗</a></p>
       </div>
     </div>
   `;

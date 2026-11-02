@@ -625,10 +625,68 @@ window.unclaimItem = function(itemId) {
   updateAdminStats();
 };
 
-// 9. RSVP Form Handling
+// 9. RSVP Form Handling with Dynamic "Add Guest" Button
 function initRSVPForm() {
   const form = document.getElementById('rsvp-form');
   if (!form) return;
+
+  const addGuestBtn = document.getElementById('add-guest-btn');
+  const guestsList = document.getElementById('additional-guests-list');
+  const noGuestsHint = document.getElementById('no-guests-hint');
+
+  function updateGuestNumbers() {
+    if (!guestsList) return;
+    const rows = guestsList.querySelectorAll('.guest-row');
+    if (noGuestsHint) {
+      noGuestsHint.style.display = rows.length === 0 ? 'block' : 'none';
+    }
+    rows.forEach((row, index) => {
+      const badge = row.querySelector('.guest-number');
+      if (badge) badge.textContent = `Guest #${index + 1}`;
+      const input = row.querySelector('.additional-guest-name');
+      if (input) input.placeholder = `Full name of guest #${index + 1}...`;
+    });
+  }
+
+  function addGuestRow(initialValue = '') {
+    if (!guestsList) return;
+    const row = document.createElement('div');
+    row.className = 'guest-row flex items-center gap-2 bg-white p-2 rounded-xl border border-stone-200 shadow-xs transition';
+    row.innerHTML = `
+      <span class="guest-number text-[11px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-md flex-shrink-0">Guest</span>
+      <input
+        type="text"
+        class="additional-guest-name flex-grow px-3 py-1.5 rounded-lg border border-stone-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 bg-white"
+        placeholder="Full name of companion..."
+        value="${initialValue.replace(/"/g, '&quot;')}"
+        required
+      />
+      <button
+        type="button"
+        class="remove-guest-btn p-1.5 text-stone-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition flex-shrink-0 cursor-pointer"
+        title="Remove this guest"
+      >
+        ✕
+      </button>
+    `;
+
+    row.querySelector('.remove-guest-btn').addEventListener('click', () => {
+      row.remove();
+      updateGuestNumbers();
+    });
+
+    guestsList.appendChild(row);
+    updateGuestNumbers();
+
+    const input = row.querySelector('.additional-guest-name');
+    if (input) input.focus();
+  }
+
+  if (addGuestBtn) {
+    addGuestBtn.addEventListener('click', () => {
+      addGuestRow();
+    });
+  }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -636,7 +694,14 @@ function initRSVPForm() {
     const name = document.getElementById('rsvp-name').value.trim();
     const contact = document.getElementById('rsvp-contact').value.trim();
     const attendance = document.querySelector('input[name="attending"]:checked')?.value || 'yes';
-    const companions = parseInt(document.getElementById('rsvp-companions').value || '0', 10);
+    
+    // Gather all additional guest names
+    const guestInputs = guestsList ? guestsList.querySelectorAll('.additional-guest-name') : [];
+    const companionNames = Array.from(guestInputs)
+      .map(input => input.value.trim())
+      .filter(val => val.length > 0);
+    const companions = companionNames.length;
+
     const dietary = document.getElementById('rsvp-dietary').value.trim();
     const message = document.getElementById('rsvp-message').value.trim();
 
@@ -651,6 +716,7 @@ function initRSVPForm() {
       contact,
       attendance,
       companions,
+      companionNames,
       totalCount: attendance === 'yes' ? 1 + companions : 0,
       dietary,
       message,
@@ -677,6 +743,8 @@ function initRSVPForm() {
     triggerConfetti();
     showRsvpSuccessModal(newRsvp);
     form.reset();
+    if (guestsList) guestsList.innerHTML = '';
+    updateGuestNumbers();
     updateAdminStats();
   });
 }
@@ -688,6 +756,7 @@ function showRsvpSuccessModal(rsvp) {
   if (!modal || !details) return;
 
   const isYes = rsvp.attendance === 'yes';
+  const hasCompanions = rsvp.companionNames && rsvp.companionNames.length > 0;
 
   details.innerHTML = `
     <div class="text-center py-4">
@@ -695,13 +764,26 @@ function showRsvpSuccessModal(rsvp) {
         ${isYes ? '🎉' : '💌'}
       </div>
       <h3 class="text-xl font-bold text-stone-800">${isYes ? "We Can't Wait to Celebrate!" : 'Thank You for Letting Us Know!'}</h3>
-      <p class="text-sm text-stone-600 mt-2">
+      <div class="text-sm text-stone-600 mt-2 space-y-1.5">
+        <p>
+          ${
+            isYes
+              ? `Thank you so much, <strong>${rsvp.name}</strong>!`
+              : `Thank you, <strong>${rsvp.name}</strong>, for sending your warmest blessings to Onin & Charlene!`
+          }
+        </p>
         ${
-          isYes
-            ? `Thank you so much, <strong>${rsvp.name}</strong>! Onin and Charlene have noted your attendance with <strong>${rsvp.companions}</strong> guest(s).`
-            : `Thank you, <strong>${rsvp.name}</strong>, for sending your warmest blessings to Onin & Charlene!`
+          isYes && hasCompanions
+            ? `<div class="bg-sky-50 text-sky-900 px-3.5 py-2 rounded-xl text-xs border border-sky-100 inline-block text-left">
+                 <p class="font-bold">Attending Guests (${rsvp.totalCount} total):</p>
+                 <ul class="list-disc list-inside mt-1 space-y-0.5 text-stone-700">
+                   <li><strong>${rsvp.name}</strong> (Primary Guest)</li>
+                   ${rsvp.companionNames.map(cn => `<li>${cn}</li>`).join('')}
+                 </ul>
+               </div>`
+            : (isYes ? `<p class="text-xs text-stone-500">Your attendance (1 guest) has been confirmed.</p>` : '')
         }
-      </p>
+      </div>
       <div class="mt-4 p-3 bg-stone-50 rounded-2xl text-xs text-stone-500 text-left space-y-1">
         <p><strong>Date:</strong> ${EVENT_CONFIG.displayDate} (${EVENT_CONFIG.displayTime})</p>
         <p><strong>Location:</strong> <a href="${EVENT_CONFIG.googleMapsUrl}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-semibold" title="Open in Google Maps">${EVENT_CONFIG.venueName}, ${EVENT_CONFIG.venueAddress} ↗</a></p>
@@ -952,7 +1034,14 @@ function updateAdminStats() {
 
   tbody.innerHTML = rsvps.map(r => `
     <tr class="border-b border-stone-100 hover:bg-stone-50/60">
-      <td class="py-2.5 px-3 font-semibold text-stone-800 text-xs">${r.name}</td>
+      <td class="py-2.5 px-3">
+        <span class="font-semibold text-stone-800 text-xs block">${r.name}</span>
+        ${
+          r.companionNames && r.companionNames.length > 0
+            ? `<span class="text-[10px] text-stone-500 block mt-0.5">Plus: <strong>${r.companionNames.join(', ')}</strong></span>`
+            : (r.companions > 0 ? `<span class="text-[10px] text-stone-500 block mt-0.5">+${r.companions} guest(s)</span>` : '')
+        }
+      </td>
       <td class="py-2.5 px-3 text-stone-600 text-xs">${r.contact || 'N/A'}</td>
       <td class="py-2.5 px-3">
         ${
@@ -975,11 +1064,12 @@ function exportRsvpsToCSV() {
     return;
   }
 
-  let csv = 'Name,Contact,Attendance,Companions,Total Headcount,Dietary Notes,Wishes Message,Date Submitted\n';
+  let csv = 'Name,Contact,Attendance,Additional Guests Count,Companion Names,Total Headcount,Dietary Notes,Wishes Message,Date Submitted\n';
 
   rsvps.forEach(r => {
     const clean = str => `"${(str || '').replace(/"/g, '""')}"`;
-    csv += `${clean(r.name)},${clean(r.contact)},${clean(r.attendance)},${r.companions || 0},${r.totalCount || 0},${clean(r.dietary)},${clean(r.message)},${clean(r.submittedAt)}\n`;
+    const companionsList = (r.companionNames || []).join('; ');
+    csv += `${clean(r.name)},${clean(r.contact)},${clean(r.attendance)},${r.companions || 0},${clean(companionsList)},${r.totalCount || 0},${clean(r.dietary)},${clean(r.message)},${clean(r.submittedAt)}\n`;
   });
 
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });

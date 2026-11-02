@@ -497,20 +497,29 @@
             </div>
           </div>
 
-          <!-- Companions / Plus Ones -->
-          <div>
-            <label for="rsvp-companions" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">
-              How many guests are attending with you? (+1s or children)
-            </label>
-            <select
-              id="rsvp-companions"
-              class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition bg-white"
-            >
-              <option value="0">Just myself (0 additional guests)</option>
-              <option value="1">+1 (One additional guest)</option>
-              <option value="2">+2 (Two additional guests)</option>
-              <option value="3">+3 (Three additional guests)</option>
-            </select>
+          <!-- Companions / Additional Guests -->
+          <div id="additional-guests-section" class="bg-stone-50/70 p-3.5 rounded-2xl border border-stone-200/80 space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider">
+                  Additional Guests (Companions)
+                </label>
+                <p class="text-[11px] text-stone-500">Bringing a plus-one, partner, or family?</p>
+              </div>
+              <button
+                type="button"
+                id="add-guest-btn"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-dark bg-white hover:bg-stone-100 px-3 py-1.5 rounded-xl border border-stone-200 shadow-xs transition cursor-pointer flex-shrink-0"
+              >
+                <span>➕ Add Guest</span>
+              </button>
+            </div>
+
+            <!-- Dynamic Additional Guest Input Rows -->
+            <div id="additional-guests-list" class="space-y-2">
+              <!-- Dynamically populated by JS when "Add Guest" is clicked -->
+            </div>
+            <p id="no-guests-hint" class="text-[11px] text-stone-400 italic">No additional guests added yet. Click "+ Add Guest" to add companion names.</p>
           </div>
 
           <!-- Dietary Restrictions -->

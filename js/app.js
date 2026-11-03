@@ -807,21 +807,52 @@ function showRsvpSuccessModal(rsvp) {
   }
 }
 
-// 10. Wishes / Guestbook
-async function fetchLiveWishes() {
+// 10. Wishes / Guestbook & Live Sync
+let isSyncingSheet = false;
+async function fetchLiveSheetData() {
   if (!EVENT_CONFIG || !EVENT_CONFIG.googleSheetAppUrl) return;
+  if (isSyncingSheet) return;
 
   try {
+    isSyncingSheet = true;
     const res = await fetch(EVENT_CONFIG.googleSheetAppUrl);
     if (!res.ok) return;
     const data = await res.json();
+    
+    // 1. Sync wishes
     if (data && Array.isArray(data.wishes)) {
       setStorage(STORAGE_KEYS.WISHES, data.wishes);
       renderWishesList(data.wishes);
     }
+
+    // 2. Sync name predictions
+    if (data && Array.isArray(data.predictions)) {
+      const cleanPredictions = data.predictions.filter(g => g && g.guesser && !['Marc', 'Jenny', 'Dave'].includes(g.guesser));
+      setStorage(STORAGE_KEYS.NAME_GUESSES, cleanPredictions);
+      renderNameGuessesList(cleanPredictions);
+    }
+
+    // 3. Sync poll votes
+    if (data && data.poll && (typeof data.poll.daddy === 'number' || typeof data.poll.mommy === 'number')) {
+      const baseDaddy = 18;
+      const baseMommy = 22;
+      const syncedVotes = {
+        daddy: baseDaddy + (data.poll.daddy || 0),
+        mommy: baseMommy + (data.poll.mommy || 0)
+      };
+      setStorage(STORAGE_KEYS.RESEMBLANCE_VOTES, syncedVotes);
+      updateResemblancePollDisplay(syncedVotes);
+    }
   } catch (err) {
-    console.warn('Google Sheet live wishes sync notice:', err);
+    console.warn('Google Sheet live sync notice:', err);
+  } finally {
+    isSyncingSheet = false;
   }
+}
+
+// Backward-compatible alias
+function fetchLiveWishes() {
+  fetchLiveSheetData();
 }
 
 function initWishes() {
@@ -863,7 +894,7 @@ function initWishes() {
       wishForm.reset();
       triggerConfetti();
       showToast('Thank you so much for your sweet message!');
-      setTimeout(fetchLiveWishes, 2500);
+      setTimeout(fetchLiveSheetData, 2500);
     });
   }
 }
@@ -879,7 +910,7 @@ function renderWishes() {
   }
 
   renderWishesList(wishes);
-  fetchLiveWishes();
+  fetchLiveSheetData();
 }
 
 function formatWishDate(raw) {
@@ -941,17 +972,25 @@ function initResemblancePoll() {
 
 function renderResemblancePoll() {
   const votes = getStorage(STORAGE_KEYS.RESEMBLANCE_VOTES, { daddy: 18, mommy: 22 });
-  const total = votes.daddy + votes.mommy;
-  const daddyPct = total === 0 ? 50 : Math.round((votes.daddy / total) * 100);
-  const mommyPct = total === 0 ? 50 : Math.round((votes.mommy / total) * 100);
+  updateResemblancePollDisplay(votes);
+  fetchLiveSheetData();
+}
+
+function updateResemblancePollDisplay(votes) {
+  if (!votes) return;
+  const daddy = votes.daddy || 0;
+  const mommy = votes.mommy || 0;
+  const total = daddy + mommy;
+  const daddyPct = total === 0 ? 50 : Math.round((daddy / total) * 100);
+  const mommyPct = total === 0 ? 50 : Math.round((mommy / total) * 100);
 
   const daddyCountEl = document.getElementById('daddy-vote-count');
   const mommyCountEl = document.getElementById('mommy-vote-count');
   const daddyBarEl = document.getElementById('daddy-vote-bar');
   const mommyBarEl = document.getElementById('mommy-vote-bar');
 
-  if (daddyCountEl) daddyCountEl.textContent = `Team Daddy Onin: ${votes.daddy} (${daddyPct}%)`;
-  if (mommyCountEl) mommyCountEl.textContent = `Team Mommy Charlene: ${votes.mommy} (${mommyPct}%)`;
+  if (daddyCountEl) daddyCountEl.textContent = `Team Daddy Onin: ${daddy} (${daddyPct}%)`;
+  if (mommyCountEl) mommyCountEl.textContent = `Team Mommy Charlene: ${mommy} (${mommyPct}%)`;
   if (daddyBarEl) daddyBarEl.style.width = `${daddyPct}%`;
   if (mommyBarEl) mommyBarEl.style.width = `${mommyPct}%`;
 }
@@ -960,9 +999,17 @@ function submitResemblanceVote(choice) {
   const votes = getStorage(STORAGE_KEYS.RESEMBLANCE_VOTES, { daddy: 18, mommy: 22 });
   votes[choice] = (votes[choice] || 0) + 1;
   setStorage(STORAGE_KEYS.RESEMBLANCE_VOTES, votes);
-  renderResemblancePoll();
+  updateResemblancePollDisplay(votes);
+  
+  // Sync Vote to Google Sheets
+  sendToGoogleSheet({
+    type: 'poll_vote',
+    choice: choice === 'daddy' ? 'Daddy Onin' : 'Mommy Charlene'
+  });
+
   triggerConfetti();
   showToast(`Thank you for your vote for Team ${choice === 'daddy' ? 'Daddy Onin 👨💙' : 'Mommy Charlene 👩💖'}!`);
+  setTimeout(fetchLiveSheetData, 2500);
 }
 
 // 12. Name Guess Game ("Guess Baby Boy's Name!")
@@ -981,7 +1028,9 @@ function initNameGuessGame() {
         return;
       }
 
-      const guesses = getStorage(STORAGE_KEYS.NAME_GUESSES, EVENT_CONFIG.initialNameGuesses);
+      let guesses = getStorage(STORAGE_KEYS.NAME_GUESSES, EVENT_CONFIG.initialNameGuesses || []);
+      // Filter out mock data
+      guesses = guesses.filter(g => g && g.guesser && !['Marc', 'Jenny', 'Dave'].includes(g.guesser));
       guesses.unshift({
         guesser,
         nameGuess,
@@ -989,22 +1038,41 @@ function initNameGuessGame() {
       });
 
       setStorage(STORAGE_KEYS.NAME_GUESSES, guesses);
-      renderNameGuesses();
+      renderNameGuessesList(guesses);
+
+      // Sync Prediction to Google Sheets
+      sendToGoogleSheet({
+        type: 'prediction',
+        guesser: guesser,
+        nameGuess: nameGuess
+      });
+
       form.reset();
       triggerConfetti();
       showToast(`Awesome! Your guess "${nameGuess}" has been submitted! ✨`);
+      setTimeout(fetchLiveSheetData, 2500);
     });
   }
 }
 
 function renderNameGuesses() {
+  let guesses = getStorage(STORAGE_KEYS.NAME_GUESSES, EVENT_CONFIG.initialNameGuesses || []);
+  const filtered = guesses.filter(g => g && g.guesser && !['Marc', 'Jenny', 'Dave'].includes(g.guesser));
+  if (filtered.length !== guesses.length) {
+    guesses = filtered;
+    setStorage(STORAGE_KEYS.NAME_GUESSES, guesses);
+  }
+
+  renderNameGuessesList(guesses);
+  fetchLiveSheetData();
+}
+
+function renderNameGuessesList(guesses) {
   const container = document.getElementById('name-guesses-list');
   if (!container) return;
 
-  const guesses = getStorage(STORAGE_KEYS.NAME_GUESSES, EVENT_CONFIG.initialNameGuesses);
-
-  if (guesses.length === 0) {
-    container.innerHTML = `<span class="text-xs text-stone-400">No guesses yet. Be the first to guess!</span>`;
+  if (!guesses || guesses.length === 0) {
+    container.innerHTML = `<span class="text-xs text-stone-400">No guesses yet. Be the first to guess! 👶✨</span>`;
     return;
   }
 

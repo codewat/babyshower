@@ -237,10 +237,6 @@ const EVENT_CONFIG = {
   // Initial Wishes (Empty by default)
   initialWishes: [],
 
-  // Initial Sample Name Guesses
-  initialNameGuesses: [
-    { guesser: "Marc", nameGuess: "Liam", date: "2026-10-25" },
-    { guesser: "Jenny", nameGuess: "Noah", date: "2026-10-25" },
-    { guesser: "Dave", nameGuess: "Ethan", date: "2026-10-25" }
-  ]
+  // Initial Name Guesses (Empty by default)
+  initialNameGuesses: []
 };

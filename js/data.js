@@ -33,6 +33,17 @@ const EVENT_CONFIG = {
   // Amazon Top Wishlist Highlights (Extracted directly from Onin & Charlene's Amazon.ca Registry)
   registryItems: [
     {
+      id: "reg-B0HG1ND54D",
+      asin: "B0HG1ND54D",
+      name: 'WiFi/Local Baby Monitor with 2 Cameras & Crib Mount Clip (5" 1080P)',
+      category: "nursery",
+      price: "$199.99",
+      image: "https://m.media-amazon.com/images/I/416Jw-5qZqL.jpg",
+      storeName: "Amazon.ca",
+      storeLink: "https://www.amazon.ca/WEMOH-Monitor-Monitoring-Detection-Subscription/dp/B0HG1ND54D?colid=KORBLJ5ITJAK&coliid=I26XP9ZD8CA3LY",
+      notes: 'Local FHSS + WiFi app monitoring, cry & motion detection, 5" 1080P split screen with 2 cameras'
+    },
+    {
       id: "reg-B075R8BXXC",
       asin: "B075R8BXXC",
       name: "The Play Gym by Lovevery",

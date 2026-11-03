@@ -32,9 +32,9 @@ const EVENT_CONFIG = {
     { name: "Champagne Gold", hex: "#dfba73" }
   ],
 
-  // Amazon Baby Registry Link
-  amazonRegistryUrl: "https://www.amazon.com/baby-reg/",
-  amazonRegistryNote: "Our official baby registry is hosted on Amazon. Simply click the link below to view the items curated for Baby Boy's arrival!",
+  // Amazon Baby Registry Link (Amazon Canada)
+  amazonRegistryUrl: "https://www.amazon.ca/baby-reg/charleneandonin-watin-january-2027-northyork/KORBLJ5ITJAK?ref_=cm_sw_r_apann_dp_9Z2GRX172C5VAG76J35V&language=en-US",
+  amazonRegistryNote: "Our official baby registry is hosted on Amazon Canada. Click the link below to browse and order directly from our curated list for Baby Boy!",
 
   // Amazon Top Wishlist Highlights
   registryItems: [
@@ -44,8 +44,8 @@ const EVENT_CONFIG = {
       category: "travel",
       price: "Amazon Registry",
       image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=600&q=80",
-      storeName: "Amazon",
-      storeLink: "https://www.amazon.com/baby-reg/",
+      storeName: "Amazon.ca",
+      storeLink: "https://www.amazon.ca/baby-reg/charleneandonin-watin-january-2027-northyork/KORBLJ5ITJAK?ref_=cm_sw_r_apann_dp_9Z2GRX172C5VAG76J35V&language=en-US",
       notes: "Breathable mesh fabric, ergonomic support for newborn to toddler"
     },
     {
@@ -54,8 +54,8 @@ const EVENT_CONFIG = {
       category: "feeding",
       price: "Amazon Registry",
       image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80",
-      storeName: "Amazon",
-      storeLink: "https://www.amazon.com/baby-reg/",
+      storeName: "Amazon.ca",
+      storeLink: "https://www.amazon.ca/baby-reg/charleneandonin-watin-january-2027-northyork/KORBLJ5ITJAK?ref_=cm_sw_r_apann_dp_9Z2GRX172C5VAG76J35V&language=en-US",
       notes: "Electric countertop baby bottle steam sterilizer and quick dryer"
     },
     {
@@ -64,8 +64,8 @@ const EVENT_CONFIG = {
       category: "nursery",
       price: "Amazon Registry",
       image: "https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&w=600&q=80",
-      storeName: "Amazon",
-      storeLink: "https://www.amazon.com/baby-reg/",
+      storeName: "Amazon.ca",
+      storeLink: "https://www.amazon.ca/baby-reg/charleneandonin-watin-january-2027-northyork/KORBLJ5ITJAK?ref_=cm_sw_r_apann_dp_9Z2GRX172C5VAG76J35V&language=en-US",
       notes: "Ultra-soft, breathable 100% organic cotton swaddles"
     },
     {
@@ -74,8 +74,8 @@ const EVENT_CONFIG = {
       category: "diapering",
       price: "Amazon Registry",
       image: "https://images.unsplash.com/photo-1584839404283-936666eb8948?auto=format&fit=crop&w=600&q=80",
-      storeName: "Amazon",
-      storeLink: "https://www.amazon.com/baby-reg/",
+      storeName: "Amazon.ca",
+      storeLink: "https://www.amazon.ca/baby-reg/charleneandonin-watin-january-2027-northyork/KORBLJ5ITJAK?ref_=cm_sw_r_apann_dp_9Z2GRX172C5VAG76J35V&language=en-US",
       notes: "Portable felt organizer for diapers, wipes, and nursery essentials"
     },
     {
@@ -84,8 +84,8 @@ const EVENT_CONFIG = {
       category: "nursery",
       price: "Amazon Registry",
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=600&q=80",
-      storeName: "Amazon",
-      storeLink: "https://www.amazon.com/baby-reg/",
+      storeName: "Amazon.ca",
+      storeLink: "https://www.amazon.ca/baby-reg/charleneandonin-watin-january-2027-northyork/KORBLJ5ITJAK?ref_=cm_sw_r_apann_dp_9Z2GRX172C5VAG76J35V&language=en-US",
       notes: "Soothing white noise sound machine with customizable ambient light"
     },
     {
@@ -94,30 +94,11 @@ const EVENT_CONFIG = {
       category: "toys",
       price: "Amazon Registry",
       image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80",
-      storeName: "Amazon",
-      storeLink: "https://www.amazon.com/baby-reg/",
+      storeName: "Amazon.ca",
+      storeLink: "https://www.amazon.ca/baby-reg/charleneandonin-watin-january-2027-northyork/KORBLJ5ITJAK?ref_=cm_sw_r_apann_dp_9Z2GRX172C5VAG76J35V&language=en-US",
       notes: "Brain development sensory cards & soft rattle toys for 0-6 months"
     }
   ],
-
-  // Cash / Diaper Fund Info (E-Transfer / Bank / Digital)
-  cashFund: {
-    title: "Diaper & Future Fund 🍼",
-    description: "For family and friends from Canada and afar who wish to send their blessings electronically:",
-    gcash: {
-      accountName: "Charlene (GCash / Remit)",
-      accountNumber: "0917-123-4567"
-    },
-    maya: {
-      accountName: "Onin (Maya / Remit)",
-      accountNumber: "0918-987-6543"
-    },
-    bank: {
-      bankName: "BDO Bank (Wire / Remitly / Wise)",
-      accountName: "Onin & Charlene",
-      accountNumber: "0012-3456-7890"
-    }
-  },
 
   // Program / Schedule
   schedule: [

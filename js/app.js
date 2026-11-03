@@ -97,7 +97,6 @@ function initApp() {
     ['Palette', renderPalette],
     ['Schedule', renderSchedule],
     ['Amazon Banner', renderAmazonRegistryBanner],
-    ['Cash Fund', renderCashFund],
     ['Registry', initRegistry],
     ['RSVP Form', initRSVPForm],
     ['Wishes', initWishes],
@@ -315,18 +314,18 @@ function renderAmazonRegistryBanner() {
         <div class="text-center md:text-left max-w-xl">
           <div class="inline-flex items-center gap-1.5 bg-[#ff9900]/15 text-[#d47800] px-3 py-1 rounded-full text-xs font-bold mb-2.5 border border-[#ff9900]/30">
             <span>📦</span>
-            <span>Official Amazon Baby Registry</span>
+            <span>Official Amazon Canada Registry 🇨🇦</span>
           </div>
           <h3 class="text-xl sm:text-2xl font-serif font-bold text-stone-800">
-            Our Gift Registry is on Amazon 🛍️
+            Our Baby Registry is on Amazon.ca 🛍️
           </h3>
           <p class="text-stone-600 text-xs sm:text-sm mt-1.5 leading-relaxed">
             ${EVENT_CONFIG.amazonRegistryNote}
           </p>
           <div class="flex flex-wrap items-center gap-3 mt-3 text-xs text-stone-500 justify-center md:justify-start">
-            <span class="flex items-center gap-1">✓ Direct shipping</span>
+            <span class="flex items-center gap-1">✓ Fast Canadian shipping</span>
             <span class="flex items-center gap-1">✓ Automatic gift tracking</span>
-            <span class="flex items-center gap-1">✓ Easy international ordering</span>
+            <span class="flex items-center gap-1">✓ Easy online ordering</span>
           </div>
         </div>
 
@@ -336,51 +335,10 @@ function renderAmazonRegistryBanner() {
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-[#ff9900] hover:bg-[#e68a00] text-stone-900 font-extrabold text-sm px-6 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5">
-            <span>Open Amazon Registry</span>
+            <span>Open Amazon.ca Registry</span>
             <span class="text-base">↗</span>
           </a>
-          <p class="text-[11px] text-stone-400 mt-1.5">Click to browse and order directly on Amazon</p>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-// 7. Cash / Diaper Fund Section
-function renderCashFund() {
-  const fundBox = document.getElementById('cash-fund-details');
-  if (!fundBox) return;
-
-  const f = EVENT_CONFIG.cashFund;
-  fundBox.innerHTML = `
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-      <div class="bg-emerald-50/70 border border-emerald-200/60 rounded-2xl p-4 text-center">
-        <div class="w-9 h-9 mx-auto rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs mb-1.5">G</div>
-        <h4 class="font-bold text-stone-800 text-sm">GCash / Remit</h4>
-        <p class="text-xs text-stone-500">${f.gcash.accountName}</p>
-        <div class="mt-2.5 bg-white px-2.5 py-1.5 rounded-lg border border-emerald-200 font-mono text-xs font-bold text-emerald-800 tracking-wider flex items-center justify-between">
-          <span class="text-[11px]">${f.gcash.accountNumber}</span>
-          <button onclick="copyToClipboard('${f.gcash.accountNumber}')" class="text-xs hover:text-emerald-950 font-sans ml-2 text-emerald-600 font-bold">Copy</button>
-        </div>
-      </div>
-
-      <div class="bg-sky-50/70 border border-sky-200/60 rounded-2xl p-4 text-center">
-        <div class="w-9 h-9 mx-auto rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs mb-1.5">M</div>
-        <h4 class="font-bold text-stone-800 text-sm">Maya / Remit</h4>
-        <p class="text-xs text-stone-500">${f.maya.accountName}</p>
-        <div class="mt-2.5 bg-white px-2.5 py-1.5 rounded-lg border border-sky-200 font-mono text-xs font-bold text-sky-800 tracking-wider flex items-center justify-between">
-          <span class="text-[11px]">${f.maya.accountNumber}</span>
-          <button onclick="copyToClipboard('${f.maya.accountNumber}')" class="text-xs hover:text-sky-950 font-sans ml-2 text-sky-600 font-bold">Copy</button>
-        </div>
-      </div>
-
-      <div class="bg-amber-50/70 border border-amber-200/60 rounded-2xl p-4 text-center">
-        <div class="w-9 h-9 mx-auto rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-xs mb-1.5">🏦</div>
-        <h4 class="font-bold text-stone-800 text-sm">${f.bank.bankName}</h4>
-        <p class="text-xs text-stone-500">${f.bank.accountName}</p>
-        <div class="mt-2.5 bg-white px-2.5 py-1.5 rounded-lg border border-amber-200 font-mono text-xs font-bold text-amber-800 tracking-wider flex items-center justify-between">
-          <span class="text-[11px]">${f.bank.accountNumber}</span>
-          <button onclick="copyToClipboard('${f.bank.accountNumber}')" class="text-xs hover:text-amber-950 font-sans ml-2 text-amber-600 font-bold">Copy</button>
+          <p class="text-[11px] text-stone-400 mt-1.5">Click to browse and order directly on Amazon.ca</p>
         </div>
       </div>
     </div>
@@ -1108,7 +1066,6 @@ function openModal(modalId) {
     } else if (targetId === 'modal-registry') {
       renderRegistryFilterButtons();
       renderRegistryItems();
-      renderCashFund();
     } else if (targetId === 'modal-games') {
       renderResemblancePoll();
       renderNameGuesses();

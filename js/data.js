@@ -37,7 +37,7 @@ const EVENT_CONFIG = {
   amazonRegistryNote: "Our official baby registry is hosted on Amazon Canada. Click the link below to browse and order directly from our curated list for Baby Boy!",
 
   // Google Sheets Integration (Auto-syncs RSVPs, Wishes, and Claims)
-  googleSheetAppUrl: "https://script.google.com/macros/s/AKfycbz-5FQ61j1Z26Gx-rK6kvYHPBsUI7UKV_6BlOiANLoNN8QRKPPI2MIQS_EvoO4fJNZQIw/exec",
+  googleSheetAppUrl: "https://script.google.com/macros/s/AKfycbyrhWtigkkJkT7e-qfbDA92YZ3dJPxgEniqCJ5u5xvTs4f_bRB49T5XX_ym7MURk4OBYA/exec",
 
   // Amazon Top Wishlist Highlights (Extracted directly from Onin & Charlene's Amazon.ca Registry)
   registryItems: [

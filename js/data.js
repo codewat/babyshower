@@ -229,21 +229,8 @@ const EVENT_CONFIG = {
     { time: "5:30 PM", title: "Photos & Parting Favors", description: "Commemorative photos with Onin & Charlene and baby shower souvenirs!" }
   ],
 
-  // Initial Sample Wishes
-  initialWishes: [
-    {
-      name: "Aunt Grace & Uncle Ben",
-      relationship: "Family (Vancouver, Canada)",
-      message: "We cannot wait to meet Baby Boy! Wishing your growing family endless health, joy, and blessings. So excited to finally learn his name! Lots of love, Onin & Charlene!",
-      date: "2026-10-24"
-    },
-    {
-      name: "Clarisse & Friends",
-      relationship: "Best Friends (Toronto, Canada)",
-      message: "So beyond excited for you both! Baby Boy is already so loved across the miles. Can't wait for all the baby cuddles and visits! Huge congratulations Onin & Charlene!",
-      date: "2026-10-25"
-    }
-  ],
+  // Initial Wishes (Empty by default)
+  initialWishes: [],
 
   // Initial Sample Name Guesses
   initialNameGuesses: [

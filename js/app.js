@@ -730,7 +730,8 @@ function initRSVPForm() {
 
     // If guest left a sweet message, post it directly to wishes guestbook!
     if (message) {
-      const wishes = getStorage(STORAGE_KEYS.WISHES, EVENT_CONFIG.initialWishes);
+      let wishes = getStorage(STORAGE_KEYS.WISHES, EVENT_CONFIG.initialWishes || []);
+      wishes = wishes.filter(w => w && w.name && !w.name.includes('Aunt Grace') && !w.name.includes('Clarisse'));
       wishes.unshift({
         name,
         relationship: attendance === 'yes' ? 'Attending Guest' : 'Sending Love from Afar',
@@ -823,7 +824,8 @@ function initWishes() {
         return;
       }
 
-      const wishes = getStorage(STORAGE_KEYS.WISHES, EVENT_CONFIG.initialWishes);
+      let wishes = getStorage(STORAGE_KEYS.WISHES, EVENT_CONFIG.initialWishes || []);
+      wishes = wishes.filter(w => w && w.name && !w.name.includes('Aunt Grace') && !w.name.includes('Clarisse'));
       wishes.unshift({
         name,
         relationship: rel,
@@ -853,7 +855,14 @@ function renderWishes() {
   const container = document.getElementById('wishes-container');
   if (!container) return;
 
-  const wishes = getStorage(STORAGE_KEYS.WISHES, EVENT_CONFIG.initialWishes);
+  let wishes = getStorage(STORAGE_KEYS.WISHES, EVENT_CONFIG.initialWishes || []);
+
+  // Filter out sample wishes
+  const filtered = wishes.filter(w => w && w.name && !w.name.includes('Aunt Grace') && !w.name.includes('Clarisse'));
+  if (filtered.length !== wishes.length) {
+    wishes = filtered;
+    setStorage(STORAGE_KEYS.WISHES, wishes);
+  }
 
   if (wishes.length === 0) {
     container.innerHTML = `<p class="text-center text-stone-400 py-6 text-xs">Be the first to leave a message for Onin, Charlene, and Baby Boy! ✨</p>`;

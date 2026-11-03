@@ -38,7 +38,7 @@ const EVENT_CONFIG = {
       name: "Amazon.ca eGift Card",
       category: "all",
       price: "Any Amount ($25 - $500)",
-      image: "https://m.media-amazon.com/images/I/41GIGY-LzmL.jpg",
+      image: "assets/amazon-gift-card.jpg",
       storeName: "Amazon.ca",
       storeLink: "https://www.amazon.ca/dp/B004M5HIQI",
       notes: "Flexible eGift card for Onin & Charlene to purchase any needed essentials for Baby Boy"

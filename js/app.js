@@ -291,7 +291,7 @@ function initCountdown() {
 // 4. Palette Color Swatches
 function renderPalette() {
   const container = document.getElementById('palette-container');
-  if (!container) return;
+  if (!container || !EVENT_CONFIG.palette) return;
 
   container.innerHTML = EVENT_CONFIG.palette.map(color => `
     <div class="flex flex-col items-center group">
@@ -304,7 +304,7 @@ function renderPalette() {
 // 5. Program Schedule
 function renderSchedule() {
   const list = document.getElementById('schedule-list');
-  if (!list) return;
+  if (!list || !EVENT_CONFIG.schedule) return;
 
   list.innerHTML = EVENT_CONFIG.schedule.map((item) => `
     <div class="relative pl-6 pb-6 last:pb-0 border-l-2 border-primary/30">

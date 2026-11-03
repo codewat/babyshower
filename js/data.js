@@ -21,16 +21,7 @@ const EVENT_CONFIG = {
   venueAddress: "North York, ON M2R1M6",
   googleMapsUrl: "https://maps.google.com/?q=5+Candle+Liteway,+North+York,+ON+M2R1M6",
   
-  // Theme & Dress Code (Baby Boy Motif)
-  dressCodeTitle: "Pastel Blue, White & Soft Earth Tones",
-  dressCodeDescription: "Guests are warmly encouraged to wear pastel blue, white, cream, or neutral pastel colors.",
-  palette: [
-    { name: "Dusty Blue", hex: "#5585b5" },
-    { name: "Baby Sky", hex: "#a4c5e8" },
-    { name: "Soft Cloud", hex: "#f0f6fc" },
-    { name: "Warm Cream", hex: "#fbf8f2" },
-    { name: "Champagne Gold", hex: "#dfba73" }
-  ],
+
 
   // Amazon Baby Registry Link (Amazon Canada)
   amazonRegistryUrl: "https://www.amazon.ca/baby-reg/charleneandonin-watin-january-2027-northyork/KORBLJ5ITJAK?ref_=cm_sw_r_apann_dp_9Z2GRX172C5VAG76J35V&language=en-US",
@@ -219,15 +210,7 @@ const EVENT_CONFIG = {
     }
   ],
 
-  // Program / Schedule
-  schedule: [
-    { time: "2:00 PM", title: "Arrival & Welcome Drinks", description: "Find your seats, grab a welcome drink, and sign the guestbook!" },
-    { time: "2:30 PM", title: "Opening Remarks & Welcome", description: "A short, heartfelt welcome from future parents Onin and Charlene." },
-    { time: "3:00 PM", title: "Baby Shower Games! 🎉", description: "Guess the Baby Food, Baby Trivia, Daddy Tummy Measure, and fun prizes!" },
-    { time: "4:00 PM", title: "Buffet Snacks & Refreshments", description: "Enjoy delicious treats, coffee, desserts, and casual mingling." },
-    { time: "4:45 PM", title: "Opening of Gifts & Well Wishes", description: "Unwrapping gifts from the Amazon registry and sharing advice for the parents-to-be." },
-    { time: "5:30 PM", title: "Photos & Parting Favors", description: "Commemorative photos with Onin & Charlene and baby shower souvenirs!" }
-  ],
+
 
   // Initial Wishes (Empty by default)
   initialWishes: [],

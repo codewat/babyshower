@@ -36,6 +36,9 @@ const EVENT_CONFIG = {
   amazonRegistryUrl: "https://www.amazon.ca/baby-reg/charleneandonin-watin-january-2027-northyork/KORBLJ5ITJAK?ref_=cm_sw_r_apann_dp_9Z2GRX172C5VAG76J35V&language=en-US",
   amazonRegistryNote: "Our official baby registry is hosted on Amazon Canada. Click the link below to browse and order directly from our curated list for Baby Boy!",
 
+  // Google Sheets Integration (Auto-syncs RSVPs, Wishes, and Claims)
+  googleSheetAppUrl: "https://script.google.com/macros/s/AKfycbz-5FQ61j1Z26Gx-rK6kvYHPBsUI7UKV_6BlOiANLoNN8QRKPPI2MIQS_EvoO4fJNZQIw/exec",
+
   // Amazon Top Wishlist Highlights (Extracted directly from Onin & Charlene's Amazon.ca Registry)
   registryItems: [
     {

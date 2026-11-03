@@ -88,6 +88,25 @@ function setStorage(key, value) {
   }
 }
 
+// Google Sheets Webhook Dispatcher
+function sendToGoogleSheet(payload) {
+  if (!EVENT_CONFIG || !EVENT_CONFIG.googleSheetAppUrl) return;
+  try {
+    fetch(EVENT_CONFIG.googleSheetAppUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
+    }).catch(err => {
+      console.warn('Google Sheet background sync notice:', err);
+    });
+  } catch (err) {
+    console.warn('Google Sheet dispatch error:', err);
+  }
+}
+
 // App Controller with readyState check & task isolation
 function initApp() {
   const tasks = [
@@ -562,6 +581,18 @@ function handleClaimSubmit(e) {
   };
 
   setStorage(STORAGE_KEYS.REGISTRY_CLAIMS, claims);
+
+  // Sync with Google Sheets
+  const foundItem = EVENT_CONFIG.registryItems?.find(i => i.id === activeClaimItemId);
+  const itemName = foundItem ? foundItem.name : activeClaimItemId;
+  sendToGoogleSheet({
+    type: 'claim',
+    itemId: activeClaimItemId,
+    itemName: itemName,
+    claimerName: claimerName,
+    claimerNote: claimerNote
+  });
+
   closeClaimModal();
   renderRegistryItems();
   triggerConfetti();
@@ -685,6 +716,18 @@ function initRSVPForm() {
     rsvps.unshift(newRsvp);
     setStorage(STORAGE_KEYS.RSVPS, rsvps);
 
+    // Sync RSVP to Google Sheets
+    sendToGoogleSheet({
+      type: 'rsvp',
+      name: newRsvp.name,
+      attendance: newRsvp.attendance,
+      totalCount: newRsvp.totalCount,
+      additionalGuests: newRsvp.companionNames,
+      contact: newRsvp.contact,
+      dietary: newRsvp.dietary,
+      message: newRsvp.message
+    });
+
     // If guest left a sweet message, post it directly to wishes guestbook!
     if (message) {
       const wishes = getStorage(STORAGE_KEYS.WISHES, EVENT_CONFIG.initialWishes);
@@ -789,6 +832,15 @@ function initWishes() {
       });
 
       setStorage(STORAGE_KEYS.WISHES, wishes);
+
+      // Sync Wish to Google Sheets
+      sendToGoogleSheet({
+        type: 'wish',
+        name: name,
+        relationship: rel,
+        message: msg
+      });
+
       renderWishes();
       wishForm.reset();
       triggerConfetti();

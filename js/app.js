@@ -882,6 +882,17 @@ function renderWishes() {
   fetchLiveWishes();
 }
 
+function formatWishDate(raw) {
+  if (!raw) return 'Recently';
+  try {
+    const d = new Date(raw);
+    if (!isNaN(d.getTime())) {
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+  } catch (e) {}
+  return String(raw).split(' GMT')[0].substring(0, 16);
+}
+
 function renderWishesList(wishes) {
   const container = document.getElementById('wishes-container');
   if (!container) return;
@@ -906,7 +917,7 @@ function renderWishesList(wishes) {
         <p class="text-xs text-stone-700 italic leading-relaxed">"${w.message}"</p>
       </div>
       <div class="mt-3 pt-2 border-t border-stone-100 flex items-center justify-between text-[10px] text-stone-400">
-        <span>${w.date || 'Recently'}</span>
+        <span>${formatWishDate(w.date)}</span>
         <span class="text-sky-400">💙</span>
       </div>
     </div>

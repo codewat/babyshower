@@ -808,6 +808,22 @@ function showRsvpSuccessModal(rsvp) {
 }
 
 // 10. Wishes / Guestbook
+async function fetchLiveWishes() {
+  if (!EVENT_CONFIG || !EVENT_CONFIG.googleSheetAppUrl) return;
+
+  try {
+    const res = await fetch(EVENT_CONFIG.googleSheetAppUrl);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data && Array.isArray(data.wishes)) {
+      setStorage(STORAGE_KEYS.WISHES, data.wishes);
+      renderWishesList(data.wishes);
+    }
+  } catch (err) {
+    console.warn('Google Sheet live wishes sync notice:', err);
+  }
+}
+
 function initWishes() {
   renderWishes();
 
@@ -843,18 +859,16 @@ function initWishes() {
         message: msg
       });
 
-      renderWishes();
+      renderWishesList(wishes);
       wishForm.reset();
       triggerConfetti();
       showToast('Thank you so much for your sweet message!');
+      setTimeout(fetchLiveWishes, 2500);
     });
   }
 }
 
 function renderWishes() {
-  const container = document.getElementById('wishes-container');
-  if (!container) return;
-
   let wishes = getStorage(STORAGE_KEYS.WISHES, EVENT_CONFIG.initialWishes || []);
 
   // Filter out sample wishes
@@ -864,7 +878,15 @@ function renderWishes() {
     setStorage(STORAGE_KEYS.WISHES, wishes);
   }
 
-  if (wishes.length === 0) {
+  renderWishesList(wishes);
+  fetchLiveWishes();
+}
+
+function renderWishesList(wishes) {
+  const container = document.getElementById('wishes-container');
+  if (!container) return;
+
+  if (!wishes || wishes.length === 0) {
     container.innerHTML = `<p class="text-center text-stone-400 py-6 text-xs">Be the first to leave a message for Onin, Charlene, and Baby Boy! ✨</p>`;
     return;
   }
@@ -874,7 +896,7 @@ function renderWishes() {
       <div>
         <div class="flex items-center gap-2.5 mb-2">
           <div class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">
-            ${w.name.charAt(0).toUpperCase()}
+            ${(w.name || 'G').charAt(0).toUpperCase()}
           </div>
           <div>
             <h5 class="font-bold text-stone-800 text-xs leading-tight">${w.name}</h5>

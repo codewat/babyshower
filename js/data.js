@@ -33,6 +33,17 @@ const EVENT_CONFIG = {
   // Amazon Top Wishlist Highlights (Extracted directly from Onin & Charlene's Amazon.ca Registry)
   registryItems: [
     {
+      id: "reg-giftcard",
+      asin: "B07P41S97J",
+      name: "Amazon.ca eGift Card",
+      category: "all",
+      price: "Any Amount ($25 - $500)",
+      image: "https://m.media-amazon.com/images/I/51viMjpYXYL._AC_UL480_QL65_.jpg",
+      storeName: "Amazon.ca",
+      storeLink: "https://www.amazon.ca/dp/B07P41S97J",
+      notes: "Flexible gift option for Onin & Charlene to purchase any needed essentials for Baby Boy"
+    },
+    {
       id: "reg-B0HG1ND54D",
       asin: "B0HG1ND54D",
       name: 'WiFi/Local Baby Monitor with 2 Cameras & Crib Mount Clip (5" 1080P)',

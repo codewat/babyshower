@@ -438,7 +438,7 @@ function renderRegistryItems() {
   const claims = getStorage(STORAGE_KEYS.REGISTRY_CLAIMS, {});
 
   const filtered = EVENT_CONFIG.registryItems.filter(item => {
-    const matchCategory = currentCategory === 'all' || item.category === currentCategory;
+    const matchCategory = currentCategory === 'all' || item.category === currentCategory || item.category === 'all';
     const matchSearch = item.name.toLowerCase().includes(searchQuery) || item.notes.toLowerCase().includes(searchQuery);
     return matchCategory && matchSearch;
   });

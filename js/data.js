@@ -44,15 +44,15 @@ const EVENT_CONFIG = {
       notes: "Flexible eGift card for Onin & Charlene to purchase any needed essentials for Baby Boy"
     },
     {
-      id: "reg-B0HG1ND54D",
-      asin: "B0HG1ND54D",
-      name: 'WiFi/Local Baby Monitor with 2 Cameras & Crib Mount Clip (5" 1080P)',
+      id: "reg-B0DFY7HDGD",
+      asin: "B0DFY7HDGD",
+      name: 'Simsky Split Screen Baby Monitor with 2 Cameras (7" Touch Screen)',
       category: "nursery",
-      price: "$199.99",
-      image: "https://m.media-amazon.com/images/I/416Jw-5qZqL.jpg",
+      price: "$218.35",
+      image: "assets/simsky-baby-monitor.jpg",
       storeName: "Amazon.ca",
-      storeLink: "https://www.amazon.ca/WEMOH-Monitor-Monitoring-Detection-Subscription/dp/B0HG1ND54D?colid=KORBLJ5ITJAK&coliid=I26XP9ZD8CA3LY",
-      notes: 'Local FHSS + WiFi app monitoring, cry & motion detection, 5" 1080P split screen with 2 cameras'
+      storeLink: "https://www.amazon.ca/Simsky-Monitor-Cameras-Portable-5200mAh/dp/B0DFY7HDGD?colid=KORBLJ5ITJAK&coliid=IIEHKTMG4QEV9",
+      notes: '7" Touch screen, 2 cameras split screen, auto tracking & cry detection, night vision, Wi-Fi & no Wi-Fi mode'
     },
     {
       id: "reg-B075R8BXXC",

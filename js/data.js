@@ -11,10 +11,10 @@ const EVENT_CONFIG = {
   themeTitle: "Baby Shower Celebration",
   bannerImage: "assets/image.jpeg",
   
-  // Date & Time (Format: YYYY-MM-DDTHH:MM:SS)
+  // Date & Event Info
   eventDate: "2026-11-28T14:00:00",
   displayDate: "Saturday, November 28, 2026",
-  displayTime: "2:00 PM - 6:00 PM",
+  displayTime: "",
   
   // Venue Details
   venueName: "5 Candle Liteway",

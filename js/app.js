@@ -211,11 +211,15 @@ function renderHeroAndDetails() {
   // Calendar Links
   const gcalBtn = document.getElementById('add-to-gcal-btn');
   if (gcalBtn) {
+    const isAllDay = !EVENT_CONFIG.displayTime;
+    const dateYmd = (EVENT_CONFIG.eventDate || '2026-11-28').split('T')[0].replace(/-/g, '');
+    const nextDayYmd = '20261129';
     const startIso = EVENT_CONFIG.eventDate.replace(/[-:]/g, '');
+    const datesParam = isAllDay ? `${dateYmd}/${nextDayYmd}` : `${startIso}/${startIso}`;
     const title = encodeURIComponent(`Baby Shower: ${EVENT_CONFIG.parentsNames}`);
     const details = encodeURIComponent(`Join us in celebrating the upcoming arrival of Baby Boy! View registry: ${EVENT_CONFIG.amazonRegistryUrl}`);
     const location = encodeURIComponent(`${EVENT_CONFIG.venueName}, ${EVENT_CONFIG.venueAddress}`);
-    gcalBtn.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startIso}/${startIso}&details=${details}&location=${location}`;
+    gcalBtn.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${datesParam}&details=${details}&location=${location}`;
   }
 
   const icsBtn = document.getElementById('download-ics-btn');
@@ -225,7 +229,12 @@ function renderHeroAndDetails() {
 }
 
 function downloadIcsFile() {
+  const isAllDay = !EVENT_CONFIG.displayTime;
   const dateFormatted = EVENT_CONFIG.eventDate.replace(/[-:]/g, '');
+  const dtLines = isAllDay
+    ? `DTSTART;VALUE=DATE:20261128\nDTEND;VALUE=DATE:20261129`
+    : `DTSTART:${dateFormatted}\nDTEND:${dateFormatted}`;
+
   const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Baby Shower Website//EN
@@ -233,8 +242,7 @@ BEGIN:VEVENT
 SUMMARY:Baby Shower: Onin & Charlene
 DESCRIPTION:Join us in celebrating with ${EVENT_CONFIG.parentsNames}! Amazon Registry: ${EVENT_CONFIG.amazonRegistryUrl}
 LOCATION:${EVENT_CONFIG.venueName}, ${EVENT_CONFIG.venueAddress}
-DTSTART:${dateFormatted}
-DTEND:${dateFormatted}
+${dtLines}
 STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR`;
@@ -787,7 +795,7 @@ function showRsvpSuccessModal(rsvp) {
         }
       </div>
       <div class="mt-4 p-3 bg-stone-50 rounded-2xl text-xs text-stone-500 text-left space-y-1">
-        <p><strong>Date:</strong> ${EVENT_CONFIG.displayDate} (${EVENT_CONFIG.displayTime})</p>
+        <p><strong>Date:</strong> ${EVENT_CONFIG.displayDate}${EVENT_CONFIG.displayTime ? ` (${EVENT_CONFIG.displayTime})` : ''}</p>
         <p><strong>Location:</strong> <a href="${EVENT_CONFIG.googleMapsUrl}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-semibold" title="Open in Google Maps">${EVENT_CONFIG.venueName}, ${EVENT_CONFIG.venueAddress} ↗</a></p>
       </div>
     </div>
